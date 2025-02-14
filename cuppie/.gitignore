@@ -1,0 +1,55 @@
+# Visual Studio/JetBrains Rider
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.dotCover
+
+# Build и кэшированные файлы
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.log
+*.cache
+*.csproj.user
+
+# NuGet
+packages/
+project.lock.json
+project.assets.json
+nuget.config
+*.nupkg
+*.snupkg
+
+# Entity Framework Migrations
+Migrations/
+
+# Logs и конфигурация
+*.log
+logs/
+appsettings.Development.json
+secrets.json
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+**/Dockerfile
+
+# Node.js (если используется)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python (если есть скрипты)
+__pycache__/
+*.pyc
+*.pyo
+
+# Rider/JetBrains
+.idea/
+*.sln.iml
