@@ -1,14 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG TARGETARCH
 WORKDIR /source
 
 # Copy project file and restore as distinct layers
 COPY  cuppie/cuppie.csproj .
-RUN dotnet restore -a $TARGETARCH   
+RUN dotnet restore  
 
 # Copy source code and publish app
 COPY  cuppie/. .
-RUN dotnet publish -a $TARGETARCH -o /app
+RUN dotnet publish -o /app
 
 
 # Runtime stage
