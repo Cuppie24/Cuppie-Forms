@@ -1,11 +1,12 @@
 services:
   app:
-    image: <my_image>
+    image: cuppieforms
     container_name: my_app
     restart: always
     ports:
-      - "5000:5000"  # Если приложение слушает 80-й порт, пробрасываем его на 8080
+      - "5000:5000"  
       - "5001:5001"
 
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production  # Если нужно
+      - ASPNETCORE_ENVIRONMENT=Production  
+      - ASPNETCORE_URLS=http://+:5000 
