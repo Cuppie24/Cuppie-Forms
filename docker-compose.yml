@@ -1,6 +1,9 @@
 services:
   app:
     image: cuppieforms
+    build: 
+      context: .
+      dockerfile: Dockerfile
     container_name: my_app
     restart: always
     ports:
