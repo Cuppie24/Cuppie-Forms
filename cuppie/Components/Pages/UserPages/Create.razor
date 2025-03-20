@@ -20,26 +20,6 @@
                 <InputText id="username" @bind-Value="User.Username" class="form-control" /> 
                 <ValidationMessage For="() => User.Username" class="text-danger" /> 
             </div>        
-            <div class="mb-3">
-                <label for="login" class="form-label">Login:</label> 
-                <InputText id="login" @bind-Value="User.Login" class="form-control" /> 
-                <ValidationMessage For="() => User.Login" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label> 
-                <InputText id="email" @bind-Value="User.Email" class="form-control" /> 
-                <ValidationMessage For="() => User.Email" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="passhash" class="form-label">PassHash:</label> 
-                <InputText id="passhash" @bind-Value="User.PassHash" class="form-control" /> 
-                <ValidationMessage For="() => User.PassHash" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="passsalt" class="form-label">PassSalt:</label> 
-                <InputText id="passsalt" @bind-Value="User.PassSalt" class="form-control" /> 
-                <ValidationMessage For="() => User.PassSalt" class="text-danger" /> 
-            </div>        
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>

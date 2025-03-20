@@ -16,10 +16,6 @@
 
 <QuickGrid Class="table" Items="context.User">
     <PropertyColumn Property="user => user.Username" />
-    <PropertyColumn Property="user => user.Login" />
-    <PropertyColumn Property="user => user.Email" />
-    <PropertyColumn Property="user => user.PassHash" />
-    <PropertyColumn Property="user => user.PassSalt" />
 
     <TemplateColumn Context="user">
         <a href="@($"users/edit?id={user.Id}")">Edit</a> |
