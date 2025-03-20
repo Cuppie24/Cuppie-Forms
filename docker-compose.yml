@@ -14,7 +14,7 @@ services:
     volumes:
       - ./keys:/root/.aspnet/DataProtection-Keys
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production  
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000  
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=mydb;Username=postgres;Password=secret
     depends_on:
@@ -29,9 +29,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=secret
     volumes:
-      - pgdata:/var/lib/postgresql/data  # Сохранение данных
+      - ./pgdata:/var/lib/postgresql/data  # Сохранение данных
     ports:
       - "5432:5432"
-
-volumes:
-  pgdata:
