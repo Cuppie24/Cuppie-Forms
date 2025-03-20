@@ -1,8 +1,16 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
-<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <h1 class="text-4xl font-bold text-blue-600">Tailwind работает!</h1>
-    <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition">
-        Нажми меня
-    </button>
-</div>
+<h3>test</h3>
+<button @onclick="ChangeText">press me</button>
+<p>@text</p>
+
+@code {
+    private string text = "not pressed";
+
+    private void ChangeText()
+    {
+        text = "pressed";
+        Console.WriteLine("Button clicked"); // Вывод в консоль сервера
+    }
+}

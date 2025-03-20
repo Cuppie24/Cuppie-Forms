@@ -1,0 +1,37 @@
+﻿@page "/login"
+@inject HttpClient http
+@rendermode InteractiveServer
+
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
+    <div class="relative bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-500 hover:scale-105">
+
+        <h2 class="text-3xl font-bold text-center text-gray-800">Sign in</h2>
+
+        <form class="mt-6 space-y-4">
+            <div>
+                <input type="text" class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 placeholder-gray-400 transition-all" placeholder="Login">
+            </div>
+            <div>
+                <input type="password" class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 placeholder-gray-400 transition-all" placeholder="Password">
+            </div>
+            <button type="button" @onclick="ChangeButtonText" class="w-full p-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 hover:shadow-lg transition-all duration-300">
+                Sign In
+            </button>
+        </form>
+        <p class="text-center mt-6">
+            @message
+        </p>
+        <p class="text-center text-gray-500 mt-6">
+            Don't have an account?
+            <a href="/register" class="text-blue-600 hover:underline transition-all">Sign Up</a>
+        </p>
+    </div>
+</div>
+
+@code {
+    string message = "hello world";
+    async Task ChangeButtonText()
+    {
+        
+    }
+}

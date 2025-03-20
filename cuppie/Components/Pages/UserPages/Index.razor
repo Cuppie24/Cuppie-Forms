@@ -1,0 +1,40 @@
+﻿@page "/users"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using cuppie.Models
+@using cuppie.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<cuppie.Data.cuppieContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="users/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.User">
+    <PropertyColumn Property="user => user.Username" />
+    <PropertyColumn Property="user => user.Login" />
+    <PropertyColumn Property="user => user.Email" />
+    <PropertyColumn Property="user => user.PassHash" />
+    <PropertyColumn Property="user => user.PassSalt" />
+
+    <TemplateColumn Context="user">
+        <a href="@($"users/edit?id={user.Id}")">Edit</a> |
+        <a href="@($"users/details?id={user.Id}")">Details</a> |
+        <a href="@($"users/delete?id={user.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private cuppieContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

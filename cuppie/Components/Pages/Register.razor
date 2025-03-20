@@ -1,0 +1,28 @@
+﻿@page "/register"
+
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-400 to-blue-600">
+    <div class="relative bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-500 hover:scale-105">
+
+        <h2 class="text-3xl font-bold text-center text-gray-800">Sign up</h2>
+
+        <form class="mt-6 space-y-4">
+            <div>
+                <input type="text" class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-green-500 placeholder-gray-400 transition-all" placeholder="Username">
+            </div>
+            <div>
+                <input type="email" class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-green-500 placeholder-gray-400 transition-all" placeholder="Email">
+            </div>
+            <div class="relative">
+                <input id="password" type="password" class="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-green-500 placeholder-gray-400 transition-all" placeholder="Password">               
+            </div>
+            <button type="submit" class="w-full p-4 bg-green-600 text-white rounded-xl hover:bg-green-700 hover:shadow-lg transition-all duration-300">
+                Sign Up
+            </button>
+        </form>
+
+        <p class="text-center text-gray-500 mt-6">
+            Already have an account?
+            <a href="/login" class="text-green-600 hover:underline transition-all">Sign In</a>
+        </p>
+    </div>
+</div>
