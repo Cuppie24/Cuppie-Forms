@@ -16,6 +16,7 @@
 
 <QuickGrid Class="table" Items="context.User">
     <PropertyColumn Property="user => user.Username" />
+    <PropertyColumn Property="user => user.Age" />
 
     <TemplateColumn Context="user">
         <a href="@($"users/edit?id={user.Id}")">Edit</a> |

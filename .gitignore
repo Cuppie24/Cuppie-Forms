@@ -1,2 +1,4 @@
 .vs/
 /cuppie/Models/User.cs
+docker-compose.yml
+/cuppie/appsettings.json

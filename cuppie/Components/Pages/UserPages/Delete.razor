@@ -21,6 +21,10 @@
             <dt class="col-sm-2">Username</dt>
             <dd class="col-sm-10">@user.Username</dd>
         </dl>
+        <dl class="row">
+            <dt class="col-sm-2">Age</dt>
+            <dd class="col-sm-10">@user.Age</dd>
+        </dl>
         <EditForm method="post" Model="user" OnValidSubmit="DeleteUser" FormName="delete" Enhance>
             <button type="submit" class="btn btn-danger" disabled="@(user is null)">Delete</button> |
             <a href="/users">Back to List</a>
