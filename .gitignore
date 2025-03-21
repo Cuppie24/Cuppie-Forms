@@ -1,4 +1,21 @@
-.vs/
-/cuppie/Models/User.cs
 /docker-compose.yml
-/cuppie/appsettings.json
+
+# Visual Studio/JetBrains Rider
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.dotCover
+
+# Build и кэшированные файлы
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.log
+*.cache
+*.csproj.user
