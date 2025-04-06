@@ -1,37 +1,72 @@
 ﻿@page "/users"
-@using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using cuppie.Models
-@using cuppie.Data
-@implements IAsyncDisposable
-@inject IDbContextFactory<cuppie.Data.cuppieContext> DbFactory
+@inject HttpClient Http
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Users</PageTitle>
 
-<h1>Index</h1>
+<div class="flex flex-col items-center min-h-screen bg-[#121212] text-[#E0E0E0] p-4">
+    <h1 class="text-3xl font-bold text-[#FF6B6B] mb-4">Пользователи</h1>
 
-<p>
-    <a href="users/create">Create New</a>
-</p>
+    <button class="mb-3 px-4 py-2 bg-[#FF6B6B] text-white rounded-md hover:bg-[#D94343] transition-all">
+        + Новый пользователь
+    </button>
 
-<QuickGrid Class="table" Items="context.User">
-    <PropertyColumn Property="user => user.Username" />
-    <PropertyColumn Property="user => user.Age" />
-
-    <TemplateColumn Context="user">
-        <a href="@($"users/edit?id={user.Id}")">Edit</a> |
-        <a href="@($"users/details?id={user.Id}")">Details</a> |
-        <a href="@($"users/delete?id={user.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
-
-@code {
-    private cuppieContext context = default!;
-
-    protected override void OnInitialized()
+    @if (users is not null && users.Any())
     {
-        context = DbFactory.CreateDbContext();
+        <div class="w-full max-w-5xl border border-[#FF6B6B] shadow-md rounded-md bg-[#1E1E1E] p-3">
+            <QuickGrid Class="w-full" Items="users.AsQueryable()">
+                <PropertyColumn Property="user => user.Username" Title="Имя пользователя" />
+                <PropertyColumn Property="user => user.Email" Title="Email" Class="email-column" />
+                <TemplateColumn Context="user">
+                    <div class="flex justify-end space-x-2">
+                        <button class="px-2 py-1 bg-[#FF6B6B] text-white rounded hover:bg-[#D94343] text-sm transition">Удалить</button>
+                        <button class="px-2 py-1 bg-[#A0A0A0] text-black rounded hover:bg-[#E0E0E0] text-sm transition">Сведения</button>
+                    </div>
+                </TemplateColumn>
+            </QuickGrid>
+        </div>
+    }
+    else
+    {
+        <p class="text-[#A0A0A0] mt-3">Загрузка пользователей...</p>
+    }
+</div>
+
+<style>
+    .email-column {
+        max-width: 200px;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
-    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+        .email-column::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .email-column::-webkit-scrollbar-track {
+            background: #2E2E2E;
+            border-radius: 10px;
+        }
+
+        .email-column::-webkit-scrollbar-thumb {
+            background: #FF6B6B;
+            border-radius: 10px;
+        }
+</style>
+
+@code {
+    private List<User> users = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            users = await Http.GetFromJsonAsync<List<User>>("api/user/all") ?? new List<User>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка загрузки пользователей: {ex.Message}");
+        }
+    }
 }

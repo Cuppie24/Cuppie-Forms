@@ -8,18 +8,24 @@ namespace cuppie.Services
 {
     public class AuthenticationHandler
     {
-        public string GenerateJwtToken(string username)
+        public bool Authentication(string username, string password)
         {
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
-            // создаем JWT-токен
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-            audience: AuthOptions.AUDIENCE,
-            claims: claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
-        }
+            return false;
+        } 
+        
+
+        //public string GenerateJwtToken(string username)
+        //{
+        //    var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
+        //    // создаем JWT-токен
+        //    var jwt = new JwtSecurityToken(
+        //            issuer: AuthOptions.ISSUER,
+        //    audience: AuthOptions.AUDIENCE,
+        //    claims: claims,
+        //            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+        //            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+        //    return new JwtSecurityTokenHandler().WriteToken(jwt);
+        //}
     }
 
     public class AuthOptions

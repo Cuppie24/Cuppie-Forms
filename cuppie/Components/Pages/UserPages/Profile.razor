@@ -1,0 +1,20 @@
+﻿@page "/profile"
+
+<div class="flex flex-col items-center p-6 bg-[#121212] text-[#E0E0E0] min-h-screen">
+    <div class="bg-[#1E1E1E] p-6 rounded-2xl shadow-lg w-full max-w-md">
+        <div class="flex flex-col items-center gap-4">
+            <img src="/img/UserIcon.png" alt="User Avatar" class="w-24 h-24 rounded-full border-2 border-[#FF6B6B]">
+            <h2 class="text-xl font-semibold">Имя пользователя</h2>
+            <p class="text-[#A0A0A0]">user@example.com</p>
+            <span class="bg-[#292929] text-sm text-[#E0E0E0] px-3 py-1 rounded">Роль: Пользователь</span>
+            <button class="mt-4 bg-[#FF6B6B] hover:bg-red-500 text-white px-4 py-2 rounded-lg transition" @onclick="EditProfile">Редактировать профиль</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private void EditProfile()
+    {
+        // Логика редактирования профиля
+    }
+}

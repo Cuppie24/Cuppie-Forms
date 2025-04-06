@@ -7,15 +7,19 @@ using Microsoft.Extensions.DependencyInjection;
 using cuppie.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContextFactory<cuppieContext>(options =>
+builder.Services.AddDbContext<CuppieDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("cuppieContext") ?? throw new InvalidOperationException("Connection string 'cuppieContext' not found.")));
+
+//builder.Services.AddDbContextFactory<CuppieDbContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("cuppieContext") ?? throw new InvalidOperationException("Connection string 'cuppieContext' not found.")));
+
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Add services to the container.
-builder.Services.AddControllers(); //���������� ������������
+builder.Services.AddControllers(); 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddAuthorization();

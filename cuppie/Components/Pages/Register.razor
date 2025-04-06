@@ -1,28 +1,105 @@
 ﻿@page "/register"
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient http;
 
-<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-400 to-blue-600">
-    <div class="relative bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-500 hover:scale-105">
+<div class="flex items-center justify-center min-h-screen bg-[#121212] text-[#E0E0E0]">
+    <div class="relative bg-[#1E1E1E] p-8 rounded-3xl shadow-xl max-w-md w-full transform transition-all duration-500 hover:scale-105">
 
-        <h2 class="text-3xl font-bold text-center text-gray-800">Sign up</h2>
+        <h2 class="text-3xl font-bold text-center text-[#FF6B6B]">Регистрация</h2>
 
-        <form class="mt-6 space-y-4">
+        <EditForm Model="registerDto" OnValidSubmit="OnSubmitBtnClick" FormName="create" Enhance class="mt-6 space-y-4">
+            <DataAnnotationsValidator />
+
             <div>
-                <input type="text" class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-green-500 placeholder-gray-400 transition-all" placeholder="Username">
+                <InputText id="username" @bind-Value="registerDto.Username" placeholder="Имя пользователя"
+                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                <ValidationMessage For="@(() => registerDto.Username)" class="text-red-500 text-sm" />
             </div>
+
             <div>
-                <input type="email" class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-green-500 placeholder-gray-400 transition-all" placeholder="Email">
+                <InputText id="email" @bind-Value="registerDto.Email" placeholder="Email"
+                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                <ValidationMessage For="@(() => registerDto.Email)" class="text-red-500 text-sm" />
             </div>
-            <div class="relative">
-                <input id="password" type="password" class="w-full p-4 pr-12 border rounded-xl focus:ring-2 focus:ring-green-500 placeholder-gray-400 transition-all" placeholder="Password">               
+
+            <div>
+                <InputText id="password" @bind-Value="registerDto.Password" placeholder="Пароль" type="password"
+                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                <ValidationMessage For="@(() => registerDto.Password)" class="text-red-500 text-sm" />
             </div>
-            <button type="submit" class="w-full p-4 bg-green-600 text-white rounded-xl hover:bg-green-700 hover:shadow-lg transition-all duration-300">
-                Sign Up
+
+            <button type="submit"
+                    class="w-full p-4 bg-[#FF6B6B] text-white rounded-xl hover:bg-[#E04E4E] hover:shadow-lg transition-all duration-300">
+                Зарегистрироваться
             </button>
-        </form>
+        </EditForm>
 
-        <p class="text-center text-gray-500 mt-6">
-            Already have an account?
-            <a href="/login" class="text-green-600 hover:underline transition-all">Sign In</a>
+        <p class="text-center text-sm mt-4"
+           style="color: @(isSuccess ? "#4CAF50" : "#FF6B6B"); visibility: @(string.IsNullOrEmpty(responseMessage) ? "hidden" : "visible");">
+            @responseMessage
         </p>
+
+        <p class="text-center text-gray-400 mt-6">
+            Уже есть аккаунт?
+            <a href="/login" class="text-[#FF6B6B] hover:underline transition-all">Войти</a>
+        </p>
+
     </div>
 </div>
+
+@code {
+    [SupplyParameterFromForm]
+    RegisterDto registerDto { get; set; } = new();
+    private string responseMessage = "";
+    private bool isSuccess = false;
+
+    private async Task OnSubmitBtnClick()
+    {
+        try
+        {
+            var response = await http.PostAsJsonAsync("api/auth/register", registerDto);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                responseMessage = "✅ Пользователь успешно создан!";
+                isSuccess = true;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict) // 409: Пользователь уже существует
+            {
+                responseMessage = "❌ Пользователь с таким именем уже зарегистрирован";
+                isSuccess = false;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest) // 400: Ошибка валидации
+            {
+                responseMessage = "❌ Ошибка: некорректные данные";
+                isSuccess = false;
+            }
+            else
+            {
+                responseMessage = $"❌ Ошибка: {response.StatusCode}";
+                isSuccess = false;
+            }
+        }
+        catch (HttpRequestException)
+        {
+            responseMessage = "❌ Сервер не найден или нет соединения.";
+            isSuccess = false;
+        }
+    }
+
+    class RegisterDto
+    {
+        [Required(ErrorMessage = "Имя пользователя обязательно")]
+        [StringLength(30, ErrorMessage = "Имя не должно превышать 30 символов")]
+        public string? Username { get; set; }
+
+        [Required(ErrorMessage = "Пароль обязателен")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "Пароль должен быть от 6 до 100 символов")]
+        public string? Password { get; set; }
+
+        [Required(ErrorMessage = "Email обязателен")]
+        [EmailAddress(ErrorMessage = "Некорректный формат Email")]
+        public string? Email { get; set; }
+    }
+}
