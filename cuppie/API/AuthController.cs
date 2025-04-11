@@ -1,6 +1,7 @@
 ﻿using cuppie.Data;
-using cuppie.Models;
+using cuppie.DTO;
 using cuppie.Services;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -11,106 +12,76 @@ namespace cuppie.API
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly CuppieDbContext _dbContext;
-        public AuthController(CuppieDbContext cuppieDbContext)
+        private readonly AuthHandler _authHandler;
+        public AuthController(AuthHandler authenticationHandler)
         {
-            _dbContext = cuppieDbContext;
+            _authHandler = authenticationHandler;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterModelDto registerDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState); // Ошибки валидации
             }
-            var user = await _dbContext.User.FirstOrDefaultAsync(u => u.Username == registerDto.Username);
 
-            if (user != null)
+            try
             {
-                return Conflict(new { message = "Пользователь с таким именем уже существует" });
+                var result = await _authHandler.AddUser(registerDto);
+                if (result.IsSuccess) return Ok(result.Data);
+                else if (result.ErrorCode == ErrorCode.Conflict) return Conflict("Пользователь с таким именем уже существует");
+                else return BadRequest("Произошла ошибка");
             }
-
-            CryptoService cryptoService = new();
-            byte[] passSalt = cryptoService.GenerateSalt(16);
-            user = new User
+            catch (Exception ex)
             {
-                Username = registerDto.Username,
-                Salt = passSalt,
-                PasswordHash = cryptoService.HashPassword(registerDto.Password, passSalt),
-                Email = registerDto.Email
-            };
-            _dbContext.User.Add(user);
-            await _dbContext.SaveChangesAsync();
-            return Ok(user);
+                return StatusCode(500, $"Внутренняя ошибка сервера: {ex.Message}");
+            }
         }
 
+
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginModelDto loginDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
+            }            
+            var result = await _authHandler.IsAuthenticated(loginDto);
 
-            // Находим пользователя по Username
-            var user = await _dbContext.User.FirstOrDefaultAsync(u => u.Username == loginDto.Username);
-
-            if (user == null)
+            if (result.IsSuccess)
             {
-                return Unauthorized(new { message = "Неверный логин или пароль" });
+                try
+                {
+                    Response.Cookies.Append(AuthHandler.JwtCookieName, result.Data, new CookieOptions
+                    {
+                        HttpOnly = true,
+                        //Secure = true,
+                        SameSite = SameSiteMode.Strict,
+                        Expires = DateTimeOffset.UtcNow.AddMinutes(120)
+                    });
+                    Console.WriteLine($"info: Запись jwt токена в куки: {result.Data.Length}");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Ошибка при попытке записать куки с JWT: {e.Message}");
+                    Console.WriteLine($"Stack Trace: {e.StackTrace}");
+                    return StatusCode(500, "Ошибка при создании jwt куки");
+                }
+
+                return Ok(result.Data);
             }
-
-            CryptoService cryptoService = new();
-
-            // Проверяем пароль
-            bool isPasswordValid = cryptoService.VerifyPassword(loginDto.Password, user.PasswordHash, user.Salt);
-
-            if (!isPasswordValid)
-            {
-                return Unauthorized(new { message = "Неверный логин или пароль" });
-            }
-
-            return Ok(new { message = "Успешный вход", user = user.Username });
-
+            else if (result.ErrorCode is ErrorCode.Unauthorized) return Unauthorized("Неверный логин или пароль");
+            else return BadRequest($"Прозошла ошибка: {result.ErrorMessage}");
         }
-    }
-    public class RegisterDto
-    {
-        public RegisterDto(string username, string password, string email)
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
         {
-            Username = username;
-            Email = email;
-            Password = password;
+            Response.Cookies.Delete("jwt");
+            return Ok();
         }
-        [Required]
-        [StringLength(30)]
-        public string? Username { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Введите корректный email")]
-        public string? Email { get; set; }
-
-        [Required]
-        public string? Password { get; set; }
     }
 
-    public class LoginDto
-    {
-        public LoginDto(string username, string password)
-        {
-            Username = username;
-            Password = password;
-        }
-
-        [Required]
-        [StringLength(30)]
-        public string? Username { get; set; }
-
-        [Required]
-        public string? Password { get; set; }
-        
-    }
 }
 

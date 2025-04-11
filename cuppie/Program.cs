@@ -3,15 +3,12 @@ using cuppie.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using cuppie.Data;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CuppieDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("cuppieContext") ?? throw new InvalidOperationException("Connection string 'cuppieContext' not found.")));
-
-//builder.Services.AddDbContextFactory<CuppieDbContext>(options =>
-//    options.UseNpgsql(builder.Configuration.GetConnectionString("cuppieContext") ?? throw new InvalidOperationException("Connection string 'cuppieContext' not found.")));
 
 
 builder.Services.AddQuickGridEntityFrameworkAdapter();
@@ -22,22 +19,59 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllers(); 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddAuthorization();
+builder.Services.AddScoped<AuthHandler>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                // Если токен уже задан (например, из заголовка Authorization) — ничего не делаем
+                if (string.IsNullOrEmpty(context.Token))
+                {
+                    // Пробуем взять из cookie
+                    if (context.Request.Cookies.ContainsKey(AuthHandler.JwtCookieName))
+                    {
+                        context.Token = context.Request.Cookies[AuthHandler.JwtCookieName];
+                    }
+                }
+
+                return Task.CompletedTask;
+            }
+        };
+        var jwtSettings = builder.Configuration.GetSection(AuthHandler.JwtSectionName);
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = AuthOptions.ISSUER,
+            ValidIssuer = jwtSettings[AuthHandler.JwtIssuerName],
             ValidateAudience = true,
-            ValidAudience = AuthOptions.AUDIENCE,
+            ValidAudience = jwtSettings[AuthHandler.JwtAudienceName],
             ValidateLifetime = true,
-            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings[AuthHandler.JwtKeyName])),
             ValidateIssuerSigningKey = true,
         };
     });
+builder.Services.AddAuthorization();
+
+
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5000/") });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("LocalPolicy", builder =>
+    {
+        builder
+            .WithOrigins("http://localhost:5005", "http://localhost:5000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials(); // Критически важно для передачи cookies
+    });
+});
+
+
+
+
 
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 builder.Logging.AddConsole();
@@ -54,12 +88,14 @@ if (!app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.UseAntiforgery();
-app.MapControllers();
+app.UseCors("LocalPolicy");
 
+
+app.MapControllers();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

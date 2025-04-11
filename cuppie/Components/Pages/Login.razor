@@ -1,6 +1,7 @@
 ﻿@page "/login"
 @using System.ComponentModel.DataAnnotations
 @inject HttpClient http
+@inject IJSRuntime JS
 
 @rendermode InteractiveServer
 
@@ -27,69 +28,76 @@
             </button>
         </EditForm>
         <p class="text-center text-sm mt-4"
-           style="color: @(isSuccess ? "#4CAF50" : "#FF6B6B"); visibility: @(string.IsNullOrEmpty(responseMessage) ? "hidden" : "visible");">
+        style="color: @(isSuccess ? "#4CAF50" : "#FF6B6B"); visibility: @(string.IsNullOrEmpty(responseMessage) ? "hidden" : "visible");">
             @responseMessage
         </p>
-
         <p class="text-center text-[#A0A0A0] mt-6">
             Нет аккаунта?
             <a href="/register" class="text-[#FF6B6B] hover:underline transition-all">Зарегистрироваться</a>
         </p>
-       
+
     </div>
 </div>
 
 @code {
+
     [SupplyParameterFromForm]
     LoginDto loginDto { get; set; } = new();
+
     private string? responseMessage { get; set; } = "";
     private bool isSuccess = false;
     private async Task OnSubmitBtnClick()
     {
         try
         {
-            var response = await http.PostAsJsonAsync("api/auth/login", loginDto);
-            if (response.IsSuccessStatusCode)
+            var response = await JS.InvokeAsync<ApiResponse>("sendApiRequest", "/api/auth/login", "POST", loginDto);
+
+            if (response.Ok)
             {
-                responseMessage = "Аутентификация успешна";
+                responseMessage = "✅ Аутентификация успешна";
                 isSuccess = true;
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized) // 401: Неверный логин или пароль
+            else if (response.Status == 401) // Unauthorized
             {
                 responseMessage = "❌ Неверное имя пользователя или пароль";
                 isSuccess = false;
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest) // 400: Ошибка валидации
+            else if (response.Status == 400) // BadRequest
             {
                 responseMessage = "❌ Ошибка: некорректные данные";
                 isSuccess = false;
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.Forbidden) // 403: Доступ запрещен
+            else if (response.Status == 403) // Forbidden
             {
                 responseMessage = "❌ Доступ запрещен. Обратитесь к администратору.";
                 isSuccess = false;
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound) // 404: API не найден
+            else if (response.Status == 404) // NotFound
             {
                 responseMessage = "❌ Сервер авторизации недоступен";
                 isSuccess = false;
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError) // 500: Ошибка сервера
+            else if (response.Status == 500) // InternalServerError
             {
                 responseMessage = "❌ Внутренняя ошибка сервера. Попробуйте позже.";
                 isSuccess = false;
             }
             else
             {
-                responseMessage = $"❌ Ошибка: {response.StatusCode}";
+                responseMessage = $"❌ Ошибка: код {response.Status}";
                 isSuccess = false;
             }
         }
-        catch (HttpRequestException)
+        catch (JSException jsEx)
         {
-            responseMessage = "❌ Сервер не найден или нет соединения.";
+            responseMessage = $"❌ Ошибка JavaScript: {jsEx.Message}";
+            isSuccess = false;
         }
-
+        catch (Exception ex)
+        {
+            responseMessage = $"❌ Неизвестная ошибка: {ex.Message}";
+            isSuccess = false;
+        }
     }
 
     class LoginDto
@@ -98,5 +106,13 @@
         public string? Username{ get; set; }
         [Required(ErrorMessage ="Пароль обязателен")]
         public string? Password{ get; set; }
+    }
+
+    public class ApiResponse
+    {
+        public int Status { get; set; }
+        public bool Ok { get; set; }
+        public string Body { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 }
