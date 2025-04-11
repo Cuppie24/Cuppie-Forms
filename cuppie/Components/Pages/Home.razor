@@ -4,7 +4,6 @@
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
-
 @code {
     private string userName;
     protected override async Task OnInitializedAsync()
@@ -25,24 +24,35 @@
     }
 }
 
-<div class="min-h-screen bg-[#121212] flex flex-col justify-center items-center px-6 sm:px-8 lg:px-10 py-6">
-    <div class="w-full max-w-md space-y-8">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold text-[#E0E0E0] mb-3">Добро пожаловать, @userName!</h1>
-            <p class="text-lg text-[#A0A0A0]">Вы успешно авторизованы.</p>
-        </div>
+<div class="relative min-h-screen bg-[#121212]">
+    <!-- Кнопка выхода в правом верхнем углу -->
+    <div class="absolute top-6 right-6">
+        <button class="bg-[#FF6B6B] text-white px-4 py-2 rounded-lg hover:bg-[#FF4B4B] transition-colors duration-300 flex items-center gap-2 shadow-lg" @onclick="HandleLogout">
+            <span>Выйти</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+        </button>
+    </div>
 
-        <div class="bg-[#1E1E1E] shadow-xl rounded-3xl p-8">
-            <div class="flex flex-col items-center">
-                <div class="text-[#FF6B6B] text-6xl mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
+    <!-- Основной контент страницы -->
+    <div class="flex flex-col justify-center items-center px-6 sm:px-8 lg:px-10 py-6 h-screen">
+        <div class="w-full max-w-md space-y-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-[#E0E0E0] mb-3">Добро пожаловать, @userName!</h1>
+                <p class="text-lg text-[#A0A0A0]">Вы успешно авторизованы.</p>
+            </div>
+            <div class="bg-[#1E1E1E] shadow-xl rounded-3xl p-8">
+                <div class="flex flex-col items-center">
+                    <div class="text-[#FF6B6B] text-6xl mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                    </div>
+                    <p class="text-[#E0E0E0] text-center text-lg">Вы находитесь на своей личной странице.</p>
                 </div>
-                <p class="text-[#E0E0E0] text-center text-lg mb-6">Вы находитесь на своей личной странице.</p>
-                <button class="bg-[#FF6B6B] text-white px-8 py-4 rounded-xl text-xl hover:bg-[#FF4B4B] transition-colors duration-300 font-medium shadow-lg" @onclick="HandleLogout">
-                    Выйти
-                </button>
             </div>
         </div>
     </div>

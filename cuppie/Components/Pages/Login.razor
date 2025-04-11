@@ -2,6 +2,7 @@
 @using System.ComponentModel.DataAnnotations
 @inject HttpClient http
 @inject IJSRuntime JS
+@inject NavigationManager NavigationManager
 
 @rendermode InteractiveServer
 
@@ -14,16 +15,16 @@
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <InputText id="username" @bind-Value="loginDto.Username" placeholder="Имя пользователя"
-                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
                 <ValidationMessage For="@(() => loginDto.Username)" class="text-red-500 text-sm mt-1 block" />
             </div>
             <div class="mb-3">
                 <InputText id="password" @bind-Value="loginDto.Password" placeholder="Пароль" type="password"
-                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
                 <ValidationMessage For="@(() => loginDto.Password)" class="text-red-500 text-sm mt-1 block" />
             </div>
             <button type="submit"
-                    class="w-full p-4 bg-[#FF6B6B] text-white rounded-xl hover:bg-[#E04E4E] hover:shadow-lg transition-all duration-300 font-medium">
+            class="w-full p-4 bg-[#FF6B6B] text-white rounded-xl hover:bg-[#E04E4E] hover:shadow-lg transition-all duration-300 font-medium">
                 Войти
             </button>
         </EditForm>
@@ -60,8 +61,8 @@
 
             if (response.Ok)
             {
-                responseMessage = "✅ Аутентификация успешна";
                 isSuccess = true;
+                NavigationManager.NavigateTo("/");
             }
             else if (response.Status == 401) // Unauthorized
             {
