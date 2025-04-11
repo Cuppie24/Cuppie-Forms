@@ -5,26 +5,21 @@
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
-@* Проверяем, авторизован ли пользователь *@
 @code {
     private string userName;
-
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-
         if (user.Identity.IsAuthenticated)
         {
             userName = user.Identity.Name ?? "Пользователь";
         }
     }
-
     private async Task HandleLogout()
     {
         // Отправляем запрос для выхода
         await JS.InvokeVoidAsync("sendApiRequest", "/api/auth/logout", "POST");
-
         // Перенаправляем пользователя на страницу входа после выхода
         NavigationManager.NavigateTo("/login", true);
     }
@@ -33,15 +28,19 @@
 <div class="min-h-screen bg-[#121212] flex flex-col justify-center items-center px-6 sm:px-8 lg:px-10 py-6">
     <div class="w-full max-w-md space-y-8">
         <div class="text-center">
-            <h1 class="text-4xl font-semibold text-[#E0E0E0]">Добро пожаловать, @userName!</h1>
-            <p class="mt-2 text-lg text-[#A0A0A0]">Вы успешно авторизованы.</p>
+            <h1 class="text-4xl font-bold text-[#E0E0E0] mb-3">Добро пожаловать, @userName!</h1>
+            <p class="text-lg text-[#A0A0A0]">Вы успешно авторизованы.</p>
         </div>
 
-        <div class="bg-[#1E1E1E] shadow-xl rounded-xl p-8 hover:bg-[#292929] transition-colors duration-300">
-            <p class="text-[#E0E0E0] text-center text-lg">Вы находитесь на своей личной странице.</p>
-
-            <div class="mt-6 text-center">
-                <button class="bg-[#FF6B6B] text-[#E0E0E0] px-8 py-4 rounded-lg text-xl hover:bg-[#FF4B4B] transition-colors duration-300" @onclick="HandleLogout">
+        <div class="bg-[#1E1E1E] shadow-xl rounded-3xl p-8">
+            <div class="flex flex-col items-center">
+                <div class="text-[#FF6B6B] text-6xl mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <p class="text-[#E0E0E0] text-center text-lg mb-6">Вы находитесь на своей личной странице.</p>
+                <button class="bg-[#FF6B6B] text-white px-8 py-4 rounded-xl text-xl hover:bg-[#FF4B4B] transition-colors duration-300 font-medium shadow-lg" @onclick="HandleLogout">
                     Выйти
                 </button>
             </div>

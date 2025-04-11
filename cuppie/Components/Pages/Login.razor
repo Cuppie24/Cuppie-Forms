@@ -6,35 +6,41 @@
 @rendermode InteractiveServer
 
 <div class="flex items-center justify-center min-h-screen bg-[#121212]">
-    <div class="relative bg-[#1E1E1E] p-8 rounded-3xl shadow-2xl max-w-md w-full transform transition-all duration-500 hover:scale-105">
+    <div class="relative bg-[#1E1E1E] p-8 rounded-3xl shadow-2xl max-w-md w-full">
 
-        <h2 class="text-3xl font-bold text-center text-[#FF6B6B]">Вход</h2>
+        <h2 class="text-3xl font-bold text-center text-[#FF6B6B] mb-6">Вход</h2>
 
-        <EditForm method="post" Model="loginDto" OnValidSubmit="OnSubmitBtnClick" FormName="create" Enhance class="mt-6 space-y-4">
+        <EditForm method="post" Model="loginDto" OnValidSubmit="OnSubmitBtnClick" FormName="create" Enhance class="space-y-5">
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <InputText id="username" @bind-Value="loginDto.Username" placeholder="Имя пользователя"
-                class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
-                <ValidationMessage For="@(() => loginDto.Username)" class="text-red-500 text-sm" />
+                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                <ValidationMessage For="@(() => loginDto.Username)" class="text-red-500 text-sm mt-1 block" />
             </div>
             <div class="mb-3">
                 <InputText id="password" @bind-Value="loginDto.Password" placeholder="Пароль" type="password"
-                class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
-                <ValidationMessage For="@(() => loginDto.Password)" class="text-red-500 text-sm" />
+                           class="w-full p-4 border border-[#FF6B6B] rounded-xl bg-[#292929] text-white focus:ring-2 focus:ring-[#FF6B6B] placeholder-gray-400 transition-all" />
+                <ValidationMessage For="@(() => loginDto.Password)" class="text-red-500 text-sm mt-1 block" />
             </div>
             <button type="submit"
-            class="w-full p-4 bg-[#FF6B6B] text-white rounded-xl hover:bg-[#E04E4E] hover:shadow-lg transition-all duration-300">
+                    class="w-full p-4 bg-[#FF6B6B] text-white rounded-xl hover:bg-[#E04E4E] hover:shadow-lg transition-all duration-300 font-medium">
                 Войти
             </button>
         </EditForm>
-        <p class="text-center text-sm mt-4"
-        style="color: @(isSuccess ? "#4CAF50" : "#FF6B6B"); visibility: @(string.IsNullOrEmpty(responseMessage) ? "hidden" : "visible");">
-            @responseMessage
-        </p>
-        <p class="text-center text-[#A0A0A0] mt-6">
-            Нет аккаунта?
-            <a href="/register" class="text-[#FF6B6B] hover:underline transition-all">Зарегистрироваться</a>
-        </p>
+
+        @if (!string.IsNullOrEmpty(responseMessage))
+        {
+            <div class="mt-4 p-3 rounded-lg text-center @(isSuccess ? "bg-green-100/10" : "bg-red-100/10")">
+                <p class="text-center text-sm" style="color: @(isSuccess ? "#4CAF50" : "#FF6B6B");">
+                    @responseMessage
+                </p>
+            </div>
+        }
+
+        <div class="flex items-center justify-center mt-6">
+            <span class="text-[#A0A0A0]">Нет аккаунта?</span>
+            <a href="/register" class="text-[#FF6B6B] hover:underline transition-all ml-2">Зарегистрироваться</a>
+        </div>
 
     </div>
 </div>
@@ -102,10 +108,10 @@
 
     class LoginDto
     {
-        [Required(ErrorMessage ="Имя пользователя обязательно")]
-        public string? Username{ get; set; }
-        [Required(ErrorMessage ="Пароль обязателен")]
-        public string? Password{ get; set; }
+        [Required(ErrorMessage = "Имя пользователя обязательно")]
+        public string? Username { get; set; }
+        [Required(ErrorMessage = "Пароль обязателен")]
+        public string? Password { get; set; }
     }
 
     public class ApiResponse
