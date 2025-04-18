@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  cuppie_forms_api:
+    build:
+      context: "C:\\Users\\Cuppie\\RiderProjects\\cuppie_forms_api"
+      dockerfile: "cuppie_forms_api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/cuppie_forms_api.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "cuppie_forms_api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\Cuppie\\RiderProjects\\cuppie_forms_api\\cuppie_forms_api:/app:rw"
+    - "C:\\Users\\Cuppie\\RiderProjects\\cuppie_forms_api:/src:rw"
+    - "C:\\Users\\Cuppie\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"

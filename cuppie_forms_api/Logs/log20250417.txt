@@ -1,0 +1,305 @@
+2025-04-17 18:52:55.667 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 18:55:11.197 +05:00 [FTL] Ошибка при запуске приложения
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: cuppie_forms_api.Services.AuthService Lifetime: Scoped ImplementationType: cuppie_forms_api.Services.AuthService': Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: cuppie_forms_api.Services.AuthService Lifetime: Scoped ImplementationType: cuppie_forms_api.Services.AuthService': Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api\Program.cs:line 39
+2025-04-17 18:58:37.570 +05:00 [FTL] Ошибка при запуске приложения
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: cuppie_forms_api.Services.AuthService Lifetime: Scoped ImplementationType: cuppie_forms_api.Services.AuthService': Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: cuppie_forms_api.Services.AuthService Lifetime: Scoped ImplementationType: cuppie_forms_api.Services.AuthService': Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api\Program.cs:line 38
+2025-04-17 19:00:00.604 +05:00 [FTL] Ошибка при запуске приложения
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: cuppie_forms_api.Services.AuthService Lifetime: Scoped ImplementationType: cuppie_forms_api.Services.AuthService': Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: cuppie_forms_api.Services.AuthService Lifetime: Scoped ImplementationType: cuppie_forms_api.Services.AuthService': Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Serilog.ILogger' while attempting to activate 'cuppie_forms_api.Services.AuthService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api\Program.cs:line 38
+2025-04-17 19:02:52.678 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 19:02:52.798 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 19:02:52.800 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 19:02:52.802 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 19:02:52.802 +05:00 [INF] Hosting environment: Development
+2025-04-17 19:02:52.803 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 19:03:04.956 +05:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - null null
+2025-04-17 19:03:04.976 +05:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - 307 0 null 21.9376ms
+2025-04-17 19:06:37.907 +05:00 [INF] Application is shutting down...
+2025-04-17 19:06:40.832 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 19:06:40.946 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 19:06:40.949 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 19:06:40.951 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 19:06:40.951 +05:00 [INF] Hosting environment: Development
+2025-04-17 19:06:40.952 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 19:06:45.854 +05:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - null null
+2025-04-17 19:06:45.874 +05:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - 307 0 null 20.501ms
+2025-04-17 19:06:51.121 +05:00 [INF] Application is shutting down...
+2025-04-17 19:06:58.780 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 19:06:58.896 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 19:06:58.898 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 19:06:58.900 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 19:06:58.900 +05:00 [INF] Hosting environment: Development
+2025-04-17 19:06:58.901 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 19:07:00.470 +05:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - null null
+2025-04-17 19:07:00.491 +05:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - 307 0 null 22.0311ms
+2025-04-17 19:07:46.474 +05:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - null null
+2025-04-17 19:07:46.477 +05:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - 307 0 null 2.9311ms
+2025-04-17 19:08:15.305 +05:00 [INF] Application is shutting down...
+2025-04-17 19:10:25.782 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 19:10:25.902 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 19:10:25.904 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 19:10:25.905 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 19:10:25.906 +05:00 [INF] Hosting environment: Development
+2025-04-17 19:10:25.906 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 19:10:32.028 +05:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - null null
+2025-04-17 19:10:32.051 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:10:32.059 +05:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - 204 null null 33.2063ms
+2025-04-17 19:10:32.064 +05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5287/api/auth/login - application/json 38
+2025-04-17 19:10:32.082 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:10:32.085 +05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5287/api/auth/login - 307 0 null 21.2289ms
+2025-04-17 19:10:32.151 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7099/api/auth/login - null null
+2025-04-17 19:10:32.154 +05:00 [INF] CORS policy execution failed.
+2025-04-17 19:10:32.155 +05:00 [INF] Request origin null does not have permission to access the resource.
+2025-04-17 19:10:32.160 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7099/api/auth/login - 204 null null 8.6774ms
+2025-04-17 19:19:01.983 +05:00 [INF] Application is shutting down...
+2025-04-17 19:19:04.951 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 19:19:05.069 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 19:19:05.071 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 19:19:05.072 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 19:19:05.073 +05:00 [INF] Hosting environment: Development
+2025-04-17 19:19:05.073 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 19:19:09.878 +05:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - null null
+2025-04-17 19:19:09.897 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:19:09.903 +05:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5287/api/auth/login - 204 null null 26.0577ms
+2025-04-17 19:19:09.907 +05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5287/api/auth/login - application/json 38
+2025-04-17 19:19:09.916 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:19:09.917 +05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5287/api/auth/login - 307 0 null 10.0946ms
+2025-04-17 19:19:09.957 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7099/api/auth/login - null null
+2025-04-17 19:19:09.959 +05:00 [INF] CORS policy execution failed.
+2025-04-17 19:19:09.960 +05:00 [INF] Request origin null does not have permission to access the resource.
+2025-04-17 19:19:09.961 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7099/api/auth/login - 204 null null 4.2203ms
+2025-04-17 19:24:29.022 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7099/api/auth/login - null null
+2025-04-17 19:24:29.024 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:24:29.024 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7099/api/auth/login - 204 null null 2.3351ms
+2025-04-17 19:24:29.030 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7099/api/auth/login - application/json 38
+2025-04-17 19:24:29.031 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:24:29.036 +05:00 [INF] Executing endpoint 'cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api)'
+2025-04-17 19:24:29.055 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(cuppie_forms_api.DTO.LoginModelDto) on controller cuppie_forms_api.Controllers.AuthController (cuppie_forms_api).
+2025-04-17 19:24:29.482 +05:00 [INF] Executing action method cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api) - Validation state: "Valid"
+2025-04-17 19:24:31.186 +05:00 [INF] Executed DbCommand (113ms) [Parameters=[@__loginModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__loginModel_Username_0
+LIMIT 1
+2025-04-17 19:24:31.305 +05:00 [INF] Сгенерирован токен для пользователя cup, длина токена: 343
+2025-04-17 19:24:31.313 +05:00 [INF] Executed action method cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1824.7629ms.
+2025-04-17 19:24:31.322 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-04-17 19:24:31.327 +05:00 [INF] Executed action cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api) in 2266.817ms
+2025-04-17 19:24:31.329 +05:00 [INF] Executed endpoint 'cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api)'
+2025-04-17 19:24:31.340 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7099/api/auth/login - 200 null text/plain; charset=utf-8 2310.2522ms
+2025-04-17 19:57:10.542 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7099/api/auth/login - null null
+2025-04-17 19:57:10.544 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:57:10.545 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7099/api/auth/login - 204 null null 2.5042ms
+2025-04-17 19:57:10.550 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7099/api/auth/login - application/json 44
+2025-04-17 19:57:10.552 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:57:10.553 +05:00 [INF] Executing endpoint 'cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api)'
+2025-04-17 19:57:10.554 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(cuppie_forms_api.DTO.LoginModelDto) on controller cuppie_forms_api.Controllers.AuthController (cuppie_forms_api).
+2025-04-17 19:57:10.557 +05:00 [INF] Executing action method cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api) - Validation state: "Valid"
+2025-04-17 19:57:10.624 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__loginModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__loginModel_Username_0
+LIMIT 1
+2025-04-17 19:57:10.626 +05:00 [WRN] Неверный логин или пароль для пользователя: saidanvar
+2025-04-17 19:57:10.628 +05:00 [INF] Executed action method cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api), returned result Microsoft.AspNetCore.Mvc.UnauthorizedObjectResult in 69.5431ms.
+2025-04-17 19:57:10.629 +05:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-04-17 19:57:10.630 +05:00 [INF] Executed action cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api) in 74.6927ms
+2025-04-17 19:57:10.631 +05:00 [INF] Executed endpoint 'cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api)'
+2025-04-17 19:57:10.632 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7099/api/auth/login - 401 null text/plain; charset=utf-8 81.2106ms
+2025-04-17 19:57:30.495 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7099/api/auth/register - null null
+2025-04-17 19:57:30.496 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:57:30.497 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7099/api/auth/register - 204 null null 2.1128ms
+2025-04-17 19:57:30.499 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7099/api/auth/register - application/json 68
+2025-04-17 19:57:30.501 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:57:30.502 +05:00 [INF] Executing endpoint 'cuppie_forms_api.Controllers.AuthController.Register (cuppie_forms_api)'
+2025-04-17 19:57:30.507 +05:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(cuppie_forms_api.DTO.RegisterModelDto) on controller cuppie_forms_api.Controllers.AuthController (cuppie_forms_api).
+2025-04-17 19:57:30.515 +05:00 [INF] Executing action method cuppie_forms_api.Controllers.AuthController.Register (cuppie_forms_api) - Validation state: "Valid"
+2025-04-17 19:57:30.572 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__registerModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__registerModel_Username_0
+LIMIT 1
+2025-04-17 19:57:30.573 +05:00 [INF] Регистрация нового пользователя: saidanvar
+2025-04-17 19:57:30.741 +05:00 [INF] Executed DbCommand (60ms) [Parameters=[@p0='?', @p1='?', @p2='?' (DbType = Binary), @p3='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "User" ("Email", "PasswordHash", "Salt", "Username")
+VALUES (@p0, @p1, @p2, @p3)
+RETURNING "Id";
+2025-04-17 19:57:30.765 +05:00 [INF] Пользователь успешно зарегистрирован: saidanvar
+2025-04-17 19:57:30.766 +05:00 [INF] Executed action method cuppie_forms_api.Controllers.AuthController.Register (cuppie_forms_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 249.7142ms.
+2025-04-17 19:57:30.767 +05:00 [INF] Executing OkObjectResult, writing value of type 'cuppie_forms_api.Models.User'.
+2025-04-17 19:57:30.794 +05:00 [INF] Executed action cuppie_forms_api.Controllers.AuthController.Register (cuppie_forms_api) in 285.9472ms
+2025-04-17 19:57:30.795 +05:00 [INF] Executed endpoint 'cuppie_forms_api.Controllers.AuthController.Register (cuppie_forms_api)'
+2025-04-17 19:57:30.796 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7099/api/auth/register - 200 null application/json; charset=utf-8 296.5485ms
+2025-04-17 19:57:51.420 +05:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7099/api/auth/login - null null
+2025-04-17 19:57:51.422 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:57:51.423 +05:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7099/api/auth/login - 204 null null 2.2719ms
+2025-04-17 19:57:51.426 +05:00 [INF] Request starting HTTP/2 POST https://localhost:7099/api/auth/login - application/json 44
+2025-04-17 19:57:51.427 +05:00 [INF] CORS policy execution successful.
+2025-04-17 19:57:51.428 +05:00 [INF] Executing endpoint 'cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api)'
+2025-04-17 19:57:51.428 +05:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(cuppie_forms_api.DTO.LoginModelDto) on controller cuppie_forms_api.Controllers.AuthController (cuppie_forms_api).
+2025-04-17 19:57:51.430 +05:00 [INF] Executing action method cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api) - Validation state: "Valid"
+2025-04-17 19:57:51.433 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__loginModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__loginModel_Username_0
+LIMIT 1
+2025-04-17 19:57:51.436 +05:00 [INF] Сгенерирован токен для пользователя saidanvar, длина токена: 352
+2025-04-17 19:57:51.437 +05:00 [INF] Executed action method cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 5.6253ms.
+2025-04-17 19:57:51.438 +05:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-04-17 19:57:51.438 +05:00 [INF] Executed action cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api) in 9.0985ms
+2025-04-17 19:57:51.439 +05:00 [INF] Executed endpoint 'cuppie_forms_api.Controllers.AuthController.Login (cuppie_forms_api)'
+2025-04-17 19:57:51.440 +05:00 [INF] Request finished HTTP/2 POST https://localhost:7099/api/auth/login - 200 null text/plain; charset=utf-8 14.2903ms
+2025-04-17 20:41:46.037 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5287/ - null null
+2025-04-17 20:41:46.040 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5287/ - 307 0 null 2.8284ms
+2025-04-17 20:41:46.051 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/ - null null
+2025-04-17 20:41:46.053 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/ - 404 0 null 1.747ms
+2025-04-17 20:41:46.055 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/, Response status code: 404
+2025-04-17 20:42:10.934 +05:00 [INF] Application is shutting down...
+2025-04-17 20:44:31.299 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 20:44:31.424 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 20:44:31.426 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 20:44:31.428 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 20:44:31.429 +05:00 [INF] Hosting environment: Development
+2025-04-17 20:44:31.429 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 20:44:40.574 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5287/swagger - null null
+2025-04-17 20:44:40.595 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5287/swagger - 307 0 null 22.4145ms
+2025-04-17 20:44:40.641 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:44:40.647 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 404 0 null 5.746ms
+2025-04-17 20:44:40.650 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/swagger, Response status code: 404
+2025-04-17 20:45:16.608 +05:00 [INF] Application is shutting down...
+2025-04-17 20:45:22.374 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 20:45:22.495 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 20:45:22.498 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 20:45:22.501 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 20:45:22.502 +05:00 [INF] Hosting environment: Development
+2025-04-17 20:45:22.503 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 20:45:28.517 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5287/swagger - null null
+2025-04-17 20:45:28.543 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5287/swagger - 307 0 null 27.4654ms
+2025-04-17 20:45:28.589 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:45:28.595 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 404 0 null 5.443ms
+2025-04-17 20:45:28.597 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/swagger, Response status code: 404
+2025-04-17 20:45:36.673 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5287/swagger - null null
+2025-04-17 20:45:36.675 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5287/swagger - 307 0 null 2.0356ms
+2025-04-17 20:45:36.683 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:45:36.686 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 404 0 null 3.2387ms
+2025-04-17 20:45:36.688 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/swagger, Response status code: 404
+2025-04-17 20:45:54.608 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5287/ - null null
+2025-04-17 20:45:54.610 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5287/ - 307 0 null 2.5091ms
+2025-04-17 20:45:54.621 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/ - null null
+2025-04-17 20:45:54.625 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/ - 404 0 null 3.7458ms
+2025-04-17 20:45:54.628 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/, Response status code: 404
+2025-04-17 20:46:56.864 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:46:56.866 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 404 0 null 1.9652ms
+2025-04-17 20:46:56.868 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/swagger, Response status code: 404
+2025-04-17 20:46:58.547 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:46:58.549 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 404 0 null 2.3536ms
+2025-04-17 20:46:58.551 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/swagger, Response status code: 404
+2025-04-17 20:48:37.777 +05:00 [INF] Application is shutting down...
+2025-04-17 20:48:41.433 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 20:48:41.567 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 20:48:41.569 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 20:48:41.572 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 20:48:41.572 +05:00 [INF] Hosting environment: Development
+2025-04-17 20:48:41.573 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 20:48:43.933 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/ - null null
+2025-04-17 20:48:43.953 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/ - 404 0 null 21.6367ms
+2025-04-17 20:48:43.966 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/, Response status code: 404
+2025-04-17 20:48:48.297 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:48:48.301 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 404 0 null 4.017ms
+2025-04-17 20:48:48.303 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/swagger, Response status code: 404
+2025-04-17 20:50:59.188 +05:00 [INF] Application is shutting down...
+2025-04-17 20:51:02.474 +05:00 [INF] Приложение запущено на порту: []
+2025-04-17 20:51:02.610 +05:00 [INF] Now listening on: https://localhost:7099
+2025-04-17 20:51:02.613 +05:00 [INF] Now listening on: http://localhost:5287
+2025-04-17 20:51:02.614 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 20:51:02.615 +05:00 [INF] Hosting environment: Development
+2025-04-17 20:51:02.616 +05:00 [INF] Content root path: C:\Users\Cuppie\RiderProjects\cuppie_forms_api\cuppie_forms_api
+2025-04-17 20:51:04.444 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/ - null null
+2025-04-17 20:51:04.482 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/ - 404 0 null 39.3087ms
+2025-04-17 20:51:04.493 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/, Response status code: 404
+2025-04-17 20:51:07.736 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger - null null
+2025-04-17 20:51:07.741 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger - 301 0 null 4.2656ms
+2025-04-17 20:51:07.747 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/index.html - null null
+2025-04-17 20:51:07.807 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/index.html - 200 null text/html;charset=utf-8 59.8551ms
+2025-04-17 20:51:07.846 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/swagger-ui.css - null null
+2025-04-17 20:51:07.847 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/index.css - null null
+2025-04-17 20:51:07.847 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/swagger-ui-bundle.js - null null
+2025-04-17 20:51:07.848 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/swagger-ui-standalone-preset.js - null null
+2025-04-17 20:51:07.848 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/index.js - null null
+2025-04-17 20:51:07.855 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/index.js - 200 null application/javascript;charset=utf-8 6.9645ms
+2025-04-17 20:51:07.858 +05:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-04-17 20:51:07.859 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/index.css - 200 202 text/css 12.5ms
+2025-04-17 20:51:07.870 +05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-04-17 20:51:07.870 +05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-04-17 20:51:07.873 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 25.0087ms
+2025-04-17 20:51:07.873 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/swagger-ui.css - 200 154949 text/css 27.394ms
+2025-04-17 20:51:07.882 +05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-04-17 20:51:07.883 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/swagger-ui-bundle.js - 200 1466908 text/javascript 35.626ms
+2025-04-17 20:51:08.025 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/v1/swagger.json - null null
+2025-04-17 20:51:08.037 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/favicon-32x32.png - null null
+2025-04-17 20:51:08.040 +05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-04-17 20:51:08.041 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/favicon-32x32.png - 200 628 image/png 4.1766ms
+2025-04-17 20:51:08.146 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 121.4165ms
+2025-04-17 20:56:04.118 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/index.html - null null
+2025-04-17 20:56:04.120 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/index.html - 200 null text/html;charset=utf-8 1.923ms
+2025-04-17 20:56:04.300 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/swagger/v1/swagger.json - null null
+2025-04-17 20:56:04.312 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.9373ms
+2025-04-17 21:01:21.546 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7099/api/auth/register/swagger - null null
+2025-04-17 21:01:21.549 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7099/api/auth/register/swagger - 404 0 null 2.9242ms
+2025-04-17 21:01:21.552 +05:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7099/api/auth/register/swagger, Response status code: 404
+2025-04-17 22:13:51.774 +05:00 [INF] Application is shutting down...
+2025-04-17 18:28:29.729 +00:00 [INF] Приложение запущено на порту: []
+2025-04-17 18:28:29.766 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+2025-04-17 18:28:30.001 +00:00 [INF] Now listening on: https://[::]:5001
+2025-04-17 18:28:30.001 +00:00 [INF] Now listening on: http://[::]:5000
+2025-04-17 18:28:30.002 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-17 18:28:30.002 +00:00 [INF] Hosting environment: Development
+2025-04-17 18:28:30.002 +00:00 [INF] Content root path: /app
+2025-04-17 19:03:55.727 +00:00 [INF] Application is shutting down...

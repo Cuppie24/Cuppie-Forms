@@ -1,0 +1,6 @@
+@cuppie_forms_api_HostAddress = http://localhost:5287
+
+GET {{cuppie_forms_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
