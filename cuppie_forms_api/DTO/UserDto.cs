@@ -39,4 +39,10 @@ namespace cuppie_forms_api.DTO
         [MinLength(6)]
         public string? Password { get; set; }
     }
+    
+    public class SafeUserDataDto
+    {
+        public string? Username { get; set; }
+        public string? Email { get; set; }
+    }
 }

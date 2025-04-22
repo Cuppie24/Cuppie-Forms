@@ -7,28 +7,15 @@ using cuppie_forms_api.Models;
 
 namespace cuppie_forms_api.Services
 {
-    public class JwtTokenService
+    public class JwtTokenService(IConfiguration config)
     {
-        private IConfiguration _config;
-
-        private static string jwtCookieName = "jwt",
-            jwtKeyName = "Key",
-            jwtIssuerName = "Issuer",
-            jwtAudienceName = "Audience",
-            jwtLifeTimeName = "LifeTime",
-            jwtSectionName = "JWT";
-        private static TokenValidationParameters validationParameters;
-        public static string JwtCookieName { get => jwtCookieName; set => jwtCookieName = value; }
-        public static string JwtKeyName { get => jwtKeyName; set => jwtKeyName = value; }
-        public static string JwtIssuerName { get => jwtIssuerName; set => jwtIssuerName = value; }
-        public static string JwtAudienceName { get => jwtAudienceName; set => jwtAudienceName = value; }
-        public static string JwtLifeTimeName { get => jwtLifeTimeName; set => jwtLifeTimeName = value; }
-        public static string JwtSectionName { get => jwtSectionName; set => jwtSectionName = value; }
-        public static TokenValidationParameters ValidationParameters { get => validationParameters; set => validationParameters = value; }
-
-
-
-
+        public static string JwtCookieName { get; set; } = "jwt";
+        public static string JwtKeyName { get; set; } = "Key";
+        public static string JwtIssuerName { get; set; } = "Issuer";
+        public static string JwtAudienceName { get; set; } = "Audience";
+        public static string JwtLifeTimeName { get; set; } = "LifeTime";
+        public static string JwtSectionName { get; set; } = "JWT";
+        public static TokenValidationParameters ValidationParameters { get; set; }
 
 
         public string GenerateJwtToken(User user)
@@ -39,19 +26,19 @@ namespace cuppie_forms_api.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
-            var jwtSettings = _config.GetSection(JwtSectionName);
+            var jwtSettings = config.GetSection(JwtSectionName);
             if (!int.TryParse(jwtSettings[JwtLifeTimeName], out int lifeTime))
             {
                 throw new InvalidDataException("Некорректное значение времени жизни токена в конфиге");
             }
 
-                var token = new JwtSecurityToken(
-                    claims: claims,
-                    expires: DateTime.UtcNow.AddMinutes(lifeTime),
-                    signingCredentials: GetSigningCredentials(),
-                    issuer: jwtSettings[JwtIssuerName],
-                    audience: jwtSettings[JwtAudienceName]
-                    );
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(lifeTime),
+                signingCredentials: GetSigningCredentials(),
+                issuer: jwtSettings[JwtIssuerName],
+                audience: jwtSettings[JwtAudienceName]
+            );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -60,7 +47,7 @@ namespace cuppie_forms_api.Services
 
         private string GenerateJwtToken(Claim[] claims)
         {
-            var jwtSettings = _config.GetSection(JwtSectionName);
+            var jwtSettings = config.GetSection(JwtSectionName);
             if (!int.TryParse(jwtSettings[JwtLifeTimeName], out int lifeTime))
             {
                 throw new InvalidDataException("Некорректное значение времени жизни токена в конфиге");
@@ -81,7 +68,7 @@ namespace cuppie_forms_api.Services
 
         private SigningCredentials GetSigningCredentials()
         {
-            var jwtSettings = _config.GetSection(JwtSectionName);
+            var jwtSettings = config.GetSection(JwtSectionName);
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings[JwtKeyName]));
             return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         }
@@ -92,7 +79,7 @@ namespace cuppie_forms_api.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             try
             {
-                var principal = tokenHandler.ValidateToken(refreshToken, validationParameters, out SecurityToken validatedToken);
+                var principal = tokenHandler.ValidateToken(refreshToken, ValidationParameters, out SecurityToken validatedToken);
                 if (validatedToken is not JwtSecurityToken jwtToken ||
                     !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -123,9 +110,15 @@ namespace cuppie_forms_api.Services
             }
         }
 
-        public JwtTokenService(IConfiguration config)
+        public ClaimsPrincipal ExtractClaimsPrincipal(string token)
         {
-            _config = config;
+            var principal = new JwtSecurityTokenHandler().ValidateToken(token, ValidationParameters, out SecurityToken validatedToken);
+            if (validatedToken is not JwtSecurityToken jwtToken ||
+                !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+            return principal;
         }
 
         static JwtTokenService()
@@ -135,7 +128,7 @@ namespace cuppie_forms_api.Services
                 .Build();
 
             var jwtSettings = config.GetSection(JwtSectionName);
-            validationParameters = new TokenValidationParameters
+            ValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
                 ValidIssuer = jwtSettings[JwtIssuerName],

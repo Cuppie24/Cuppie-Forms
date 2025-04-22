@@ -7,7 +7,7 @@ namespace cuppie_forms_api.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController(AuthService authenticationHandler, Ilogger _ilogger) : ControllerBase
+    public class AuthController(AuthService authService, Ilogger _ilogger) : ControllerBase
     {
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModelDto registerDto)
@@ -19,7 +19,7 @@ namespace cuppie_forms_api.Controllers
 
             try
             {
-                var result = await authenticationHandler.AddUser(registerDto);
+                var result = await authService.AddUser(registerDto);
                 if (result.IsSuccess) return Ok(result.Data);
                 else if (result.ErrorCode == ErrorCode.Conflict) return Conflict("Пользователь с таким именем уже существует");
                 else return BadRequest("Произошла ошибка");
@@ -34,23 +34,26 @@ namespace cuppie_forms_api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModelDto loginDto)
         {
+            _ilogger.Information("Поступил запрос на api/auth/login");
             if (!ModelState.IsValid)
             {
+                _ilogger.Warning("Некорректные данные для логина");
                 return BadRequest(ModelState);
             }
-            var result = await authenticationHandler.IsAuthenticated(loginDto);
+            var result = await authService.IsAuthenticated(loginDto);
 
             if (result.IsSuccess)
             {
                 try
                 {
-                    Response.Cookies.Append(JwtTokenService.JwtCookieName, result.Data, new CookieOptions
+                    Response.Cookies.Append(JwtTokenService.JwtCookieName, result.Data ?? throw new InvalidOperationException(), new CookieOptions
                     {
                         HttpOnly = true,
                         //Secure = true,
-                        SameSite = SameSiteMode.Strict,
+                        SameSite = SameSiteMode.Lax,
                         Expires = DateTimeOffset.UtcNow.AddMinutes(120)
                     });
+                    _ilogger.Information("Логин прошел успешно, jwt куки отправлено");
                 }
                 catch (Exception e)
                 {
@@ -60,8 +63,13 @@ namespace cuppie_forms_api.Controllers
 
                 return Ok(result.Data);
             }
-            else if (result.ErrorCode is ErrorCode.Unauthorized) return Unauthorized("Неверный логин или пароль");
-            else return BadRequest($"Прозошла ошибка: {result.ErrorMessage}");
+
+            if (result.ErrorCode is ErrorCode.Unauthorized)
+            {
+                _ilogger.Information("Неверный логин или пароль");
+                return Unauthorized("Неверный логин или пароль");
+            }
+            return BadRequest($"Прозошла ошибка: {result.ErrorMessage}");
         }
 
         [HttpPost("refresh")]
@@ -69,7 +77,7 @@ namespace cuppie_forms_api.Controllers
         {
             if (Request.Cookies.TryGetValue("refreshToken", out var refreshToken))
             {
-                var result = authenticationHandler.RefreshToken(refreshToken);
+                var result = authService.RefreshToken(refreshToken);
                 if (result.IsSuccess)
                     return Ok(result.Data);
                 else
@@ -86,6 +94,25 @@ namespace cuppie_forms_api.Controllers
         {
             Response.Cookies.Delete("jwt");
             return Ok();
+        }
+        
+        [HttpGet("me")]
+        public IActionResult GetUserData()
+        {
+            _ilogger.Information("Поступил запрос на api/auth/me");
+            if (Request.Cookies.TryGetValue(JwtTokenService.JwtCookieName, out var jwt))
+            {
+                var result = authService.GetCurrentUserData(jwt);
+                if (result.Data == null)
+                {
+                    _ilogger.Warning("Не удалось получить данные из jwt куки");
+                    return Unauthorized();
+                }
+                return Ok(result.Data);    
+            }
+            
+            _ilogger.Information("Нет подходящего куки для авторизации");
+            return Unauthorized();
         }
     }
 
