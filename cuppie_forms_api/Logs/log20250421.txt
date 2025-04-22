@@ -1,0 +1,20 @@
+2025-04-21 04:16:48.535 +00:00 [INF] Приложение запущено на порту: []
+2025-04-21 04:16:48.575 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+2025-04-21 04:16:48.848 +00:00 [INF] Now listening on: https://[::]:5001
+2025-04-21 04:16:48.848 +00:00 [INF] Now listening on: http://[::]:5000
+2025-04-21 04:16:48.849 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-21 04:16:48.849 +00:00 [INF] Hosting environment: Development
+2025-04-21 04:16:48.850 +00:00 [INF] Content root path: /app
+2025-04-21 04:16:56.279 +00:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - null null
+2025-04-21 04:16:56.330 +00:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - 200 null text/html;charset=utf-8 51.8783ms
+2025-04-21 04:16:56.451 +00:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - null null
+2025-04-21 04:16:56.527 +00:00 [INF] Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 76.0696ms
+2025-04-21 04:17:58.474 +00:00 [INF] Application is shutting down...
+2025-04-21 04:18:12.147 +00:00 [INF] Приложение запущено на порту: []
+2025-04-21 04:18:12.186 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+2025-04-21 04:18:12.442 +00:00 [INF] Now listening on: https://[::]:5001
+2025-04-21 04:18:12.443 +00:00 [INF] Now listening on: http://[::]:5000
+2025-04-21 04:18:12.444 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-21 04:18:12.444 +00:00 [INF] Hosting environment: Development
+2025-04-21 04:18:12.444 +00:00 [INF] Content root path: /app
+2025-04-21 04:18:16.823 +00:00 [INF] Application is shutting down...

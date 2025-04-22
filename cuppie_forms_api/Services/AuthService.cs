@@ -1,4 +1,5 @@
-﻿using cuppie_forms_api.Data;
+﻿using System.Security.Claims;
+using cuppie_forms_api.Data;
 using cuppie_forms_api.DTO;
 using cuppie_forms_api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -95,5 +96,26 @@ public class AuthService
 
         _logger.Error("Ошибка при обновлении токена: {ErrorMessage}", token.ErrorCode);
         return OperationResult<string>.Failure("Ошибка при обновлении токена", token.ErrorCode);
+    }
+
+    public OperationResult<SafeUserDataDto> GetCurrentUserData(string token)
+    {
+        try
+        {
+            var principal = _jwtTokenService.ExtractClaimsPrincipal(token);
+            var result = new SafeUserDataDto
+            {
+                Username = principal.FindFirst(ClaimTypes.Name)?.Value,
+                Email = principal.FindFirst(ClaimTypes.Email)?.Value
+            };
+        
+            return OperationResult<SafeUserDataDto>.Success(result);
+        }
+        catch (Exception e)
+        {
+            string message = $"Ошибка при извлечении данных из токена {e.Message}";
+            _logger.Error(message + "\r\n" + e.StackTrace, e);;
+            return OperationResult<SafeUserDataDto>.Failure(message, ErrorCode.InternalServerError);;
+        }
     }
 }

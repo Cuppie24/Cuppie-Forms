@@ -3,7 +3,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import apiAxios from "../api/axios.ts";
+import { useAuth } from '@/context/AuthContext';
+
 
 // Схема Zod для валидации
 const loginSchema = z.object({
@@ -20,6 +21,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [responseMessage, setResponseMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const { login } = useAuth(); // Получаем метод login из AuthContext
 
   const {
     register,
@@ -33,8 +35,9 @@ export default function Login() {
 
   const onSubmit = async (data: LoginDto) => {
     try {
-      await apiAxios.post("/api/auth/login", data);
-  
+      
+      await login(data.username, data.password); // Используем метод login из AuthContext
+
       setIsSuccess(true);
       setResponseMessage("✅ Успешный вход");
       navigate("/");

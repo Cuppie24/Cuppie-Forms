@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiAxios = axios.create({
-  baseURL: "https://localhost:5001", // <- твой сервер
+  baseURL: "http://localhost:5000", // <- твой сервер
   withCredentials: true, // если ты используешь cookies (например, для JWT)
 });
 
