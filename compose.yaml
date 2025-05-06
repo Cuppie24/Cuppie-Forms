@@ -1,0 +1,47 @@
+﻿services:
+  cuppie_forms_backend:
+    image: cuppie_forms_backend
+    build:
+      context: ./cuppie_forms_backend
+      dockerfile: Dockerfile
+    container_name: api
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=cuppie_database;Username=cuppie;Password=cupcup
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=cupcupcup
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/SslSertificate.pfx
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    volumes:
+      - ./cuppie_forms_backend/certs:/https  # Проброс директории с сертификатом
+
+  cuppie_forms_frontend:
+    image: cuppie_forms_frontend
+    build:
+      context: ./cuppie_forms_frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    container_name: front
+    depends_on:
+      - cuppie_forms_backend
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: cuppie_database
+      POSTGRES_USER: cuppie
+      POSTGRES_PASSWORD: cupcup
+    ports:
+      - "5432:5432"
+    container_name: db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+      <PackageReference Include="Serilog" Version="4.2.1-dev-02352" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Cuppie.Domain\Cuppie.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

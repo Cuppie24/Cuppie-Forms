@@ -1,0 +1,167 @@
+2025-05-06 16:07:57.757 +05:00 [FTL] Ошибка при запуске приложения
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: Cuppie.Application.Interfaces.IAuthService Lifetime: Scoped ImplementationType: Cuppie.Infrastructure.Services.AuthService': Unable to resolve service for type 'Cuppie.Infrastructure.Services.JwtTokenService' while attempting to activate 'Cuppie.Infrastructure.Services.AuthService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: Cuppie.Application.Interfaces.IAuthService Lifetime: Scoped ImplementationType: Cuppie.Infrastructure.Services.AuthService': Unable to resolve service for type 'Cuppie.Infrastructure.Services.JwtTokenService' while attempting to activate 'Cuppie.Infrastructure.Services.AuthService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Cuppie.Infrastructure.Services.JwtTokenService' while attempting to activate 'Cuppie.Infrastructure.Services.AuthService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:09:25.439 +05:00 [FTL] Ошибка при запуске приложения
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: Cuppie.Application.Interfaces.IAuthService Lifetime: Scoped ImplementationType: Cuppie.Infrastructure.Services.AuthService': Unable to resolve service for type 'Cuppie.Infrastructure.Services.JwtTokenService' while attempting to activate 'Cuppie.Infrastructure.Services.AuthService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: Cuppie.Application.Interfaces.IAuthService Lifetime: Scoped ImplementationType: Cuppie.Infrastructure.Services.AuthService': Unable to resolve service for type 'Cuppie.Infrastructure.Services.JwtTokenService' while attempting to activate 'Cuppie.Infrastructure.Services.AuthService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Cuppie.Infrastructure.Services.JwtTokenService' while attempting to activate 'Cuppie.Infrastructure.Services.AuthService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:13:39.059 +05:00 [FTL] Ошибка при запуске приложения
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:17:16.093 +05:00 [FTL] Ошибка при запуске приложения
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:17:34.772 +05:00 [FTL] Ошибка при запуске приложения
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:18:49.908 +05:00 [FTL] Ошибка при запуске приложения
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:21:06.154 +05:00 [FTL] Ошибка при запуске приложения
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 16:21:18.678 +05:00 [FTL] Ошибка при запуске приложения
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Api\Program.cs:line 17
+2025-05-06 12:02:30.376 +00:00 [INF] Приложение запущено
+2025-05-06 12:02:30.416 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+2025-05-06 12:02:30.649 +00:00 [INF] Now listening on: https://[::]:5001
+2025-05-06 12:02:30.650 +00:00 [INF] Now listening on: http://[::]:5000
+2025-05-06 12:02:30.650 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-06 12:02:30.651 +00:00 [INF] Hosting environment: Development
+2025-05-06 12:02:30.651 +00:00 [INF] Content root path: /app
+2025-05-06 12:03:05.877 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - null null
+2025-05-06 12:03:05.898 +00:00 [INF] CORS policy execution successful.
+2025-05-06 12:03:05.909 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 38
+2025-05-06 12:03:05.903 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - 204 null null 26.2482ms
+2025-05-06 12:03:05.912 +00:00 [INF] CORS policy execution successful.
+2025-05-06 12:03:05.915 +00:00 [INF] Executing endpoint 'Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api)'
+2025-05-06 12:03:05.929 +00:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Cuppie.Application.DTOs.LoginModelDto) on controller Cuppie.Api.Controllers.AuthController (Cuppie.Api).
+2025-05-06 12:03:06.102 +00:00 [INF] Поступил запрос на api/auth/login
+2025-05-06 12:03:06.770 +00:00 [INF] Executed DbCommand (30ms) [Parameters=[@__loginModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__loginModel_Username_0
+LIMIT 1
+2025-05-06 12:03:06.842 +00:00 [INF] Сгенерирован токен для пользователя cup, длина токена: 343
+2025-05-06 12:03:06.844 +00:00 [INF] Логин прошел успешно, jwt куки отправлено
+2025-05-06 12:03:06.848 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-05-06 12:03:06.852 +00:00 [INF] Executed action Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api) in 920.2094ms
+2025-05-06 12:03:06.852 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api)'
+2025-05-06 12:03:06.858 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null text/plain; charset=utf-8 948.99ms
+2025-05-06 12:03:06.858 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/auth/me - null null
+2025-05-06 12:03:06.862 +00:00 [INF] CORS policy execution successful.
+2025-05-06 12:03:06.862 +00:00 [INF] Executing endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
+2025-05-06 12:03:06.864 +00:00 [INF] Route matched with {action = "GetUserData", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUserData() on controller Cuppie.Api.Controllers.AuthController (Cuppie.Api).
+2025-05-06 12:03:06.865 +00:00 [INF] Поступил запрос на api/auth/me
+2025-05-06 12:03:06.879 +00:00 [ERR] Ошибка при извлечении данных из токена IDX10000: The parameter 'validationParameters' cannot be a 'null' or an empty object.  (Parameter 'validationParameters')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Cuppie.Infrastructure.Services.JwtTokenService.ExtractClaimsPrincipal(String token) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Infrastructure\Services\JwtTokenService.cs:line 117
+   at Cuppie.Infrastructure.Services.AuthService.GetCurrentUserData(String token) in C:\Users\Cuppie\RiderProjects\cuppie_forms_api\src\Cuppie.Infrastructure\Services\AuthService.cs:line 107
+2025-05-06 12:03:06.879 +00:00 [WRN] Не удалось получить данные из jwt куки
+2025-05-06 12:03:06.880 +00:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-05-06 12:03:06.894 +00:00 [INF] Executed action Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api) in 30.0112ms
+2025-05-06 12:03:06.895 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
+2025-05-06 12:03:06.895 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/auth/me - 401 null application/problem+json; charset=utf-8 36.787ms
+2025-05-06 13:22:10.110 +00:00 [INF] Application is shutting down...
+2025-05-06 13:22:12.466 +00:00 [INF] Приложение запущено
+2025-05-06 13:22:12.510 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+2025-05-06 13:22:12.850 +00:00 [INF] Now listening on: https://[::]:5001
+2025-05-06 13:22:12.851 +00:00 [INF] Now listening on: http://[::]:5000
+2025-05-06 13:22:12.852 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-06 13:22:12.852 +00:00 [INF] Hosting environment: Development
+2025-05-06 13:22:12.852 +00:00 [INF] Content root path: /app
+2025-05-06 13:22:17.169 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - null null
+2025-05-06 13:22:17.196 +00:00 [INF] CORS policy execution successful.
+2025-05-06 13:22:17.208 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 38
+2025-05-06 13:22:17.201 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - 204 null null 33.237ms
+2025-05-06 13:22:17.211 +00:00 [INF] CORS policy execution successful.
+2025-05-06 13:22:17.215 +00:00 [INF] Executing endpoint 'Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api)'
+2025-05-06 13:22:17.230 +00:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Cuppie.Application.DTOs.LoginModelDto) on controller Cuppie.Api.Controllers.AuthController (Cuppie.Api).
+2025-05-06 13:22:17.465 +00:00 [INF] Поступил запрос на api/auth/login
+2025-05-06 13:22:18.207 +00:00 [INF] Executed DbCommand (28ms) [Parameters=[@__loginModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__loginModel_Username_0
+LIMIT 1
+2025-05-06 13:22:18.279 +00:00 [INF] Сгенерирован токен для пользователя cup, длина токена: 343
+2025-05-06 13:22:18.281 +00:00 [INF] Логин прошел успешно, jwt куки отправлено
+2025-05-06 13:22:18.285 +00:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-05-06 13:22:18.289 +00:00 [INF] Executed action Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api) in 1056.8574ms
+2025-05-06 13:22:18.290 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api)'
+2025-05-06 13:22:18.295 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 200 null text/plain; charset=utf-8 1087.2407ms
+2025-05-06 13:22:18.297 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/auth/me - null null
+2025-05-06 13:22:18.301 +00:00 [INF] CORS policy execution successful.
+2025-05-06 13:22:18.302 +00:00 [INF] Executing endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
+2025-05-06 13:22:18.304 +00:00 [INF] Route matched with {action = "GetUserData", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUserData() on controller Cuppie.Api.Controllers.AuthController (Cuppie.Api).
+2025-05-06 13:22:18.306 +00:00 [INF] Поступил запрос на api/auth/me
+2025-05-06 13:22:18.325 +00:00 [INF] Executing OkObjectResult, writing value of type 'Cuppie.Application.DTOs.SafeUserDataDto'.
+2025-05-06 13:22:18.329 +00:00 [INF] Executed action Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api) in 24.6412ms
+2025-05-06 13:22:18.330 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
+2025-05-06 13:22:18.330 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/auth/me - 200 null application/json; charset=utf-8 32.9377ms
+2025-05-06 13:42:41.908 +00:00 [INF] Application is shutting down...

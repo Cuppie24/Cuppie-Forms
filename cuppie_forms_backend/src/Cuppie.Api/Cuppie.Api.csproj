@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+        <PackageReference Include="Serilog" Version="4.2.1-dev-02352" />
+        <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+        <PackageReference Include="xunit" Version="2.9.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Cuppie.Application\Cuppie.Application.csproj" />
+      <ProjectReference Include="..\Cuppie.Infrastructure\Cuppie.Infrastructure.csproj" />
+    </ItemGroup>
+</Project>

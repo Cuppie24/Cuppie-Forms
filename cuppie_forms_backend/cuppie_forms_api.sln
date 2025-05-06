@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{00ACEE5E-DC7D-4739-8422-50176B9D741A}"
+	ProjectSection(SolutionItems) = preProject
+		..\compose.yaml = ..\compose.yaml
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cuppie.Api", "src\Cuppie.Api\Cuppie.Api.csproj", "{3BA4D5CE-2CE0-4703-A0B4-B54B95E6E599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{663C1002-9D34-4B15-8DDC-C129AA2BCB41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cuppie.Application", "src\Cuppie.Application\Cuppie.Application.csproj", "{1421597E-F50E-4651-89BB-C5CC82E85E71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cuppie.Infrastructure", "src\Cuppie.Infrastructure\Cuppie.Infrastructure.csproj", "{4F819F48-855B-4936-83D2-FF8A231DE828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cuppie.Domain", "src\Cuppie.Domain\Cuppie.Domain.csproj", "{EE6994F7-4231-431A-A3EE-FC073CD9A283}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BA4D5CE-2CE0-4703-A0B4-B54B95E6E599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA4D5CE-2CE0-4703-A0B4-B54B95E6E599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA4D5CE-2CE0-4703-A0B4-B54B95E6E599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA4D5CE-2CE0-4703-A0B4-B54B95E6E599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663C1002-9D34-4B15-8DDC-C129AA2BCB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663C1002-9D34-4B15-8DDC-C129AA2BCB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663C1002-9D34-4B15-8DDC-C129AA2BCB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663C1002-9D34-4B15-8DDC-C129AA2BCB41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1421597E-F50E-4651-89BB-C5CC82E85E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1421597E-F50E-4651-89BB-C5CC82E85E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1421597E-F50E-4651-89BB-C5CC82E85E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1421597E-F50E-4651-89BB-C5CC82E85E71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F819F48-855B-4936-83D2-FF8A231DE828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F819F48-855B-4936-83D2-FF8A231DE828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F819F48-855B-4936-83D2-FF8A231DE828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F819F48-855B-4936-83D2-FF8A231DE828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE6994F7-4231-431A-A3EE-FC073CD9A283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE6994F7-4231-431A-A3EE-FC073CD9A283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE6994F7-4231-431A-A3EE-FC073CD9A283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE6994F7-4231-431A-A3EE-FC073CD9A283}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal
