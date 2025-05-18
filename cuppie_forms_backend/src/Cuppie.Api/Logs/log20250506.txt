@@ -165,3 +165,51 @@ LIMIT 1
 2025-05-06 13:22:18.330 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
 2025-05-06 13:22:18.330 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/auth/me - 200 null application/json; charset=utf-8 32.9377ms
 2025-05-06 13:42:41.908 +00:00 [INF] Application is shutting down...
+2025-05-06 14:29:41.963 +00:00 [INF] Приложение запущено
+2025-05-06 14:29:42.002 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+2025-05-06 14:29:42.241 +00:00 [INF] Now listening on: https://[::]:5001
+2025-05-06 14:29:42.242 +00:00 [INF] Now listening on: http://[::]:5000
+2025-05-06 14:29:42.242 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-06 14:29:42.242 +00:00 [INF] Hosting environment: Development
+2025-05-06 14:29:42.243 +00:00 [INF] Content root path: /app
+2025-05-06 14:31:45.812 +00:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/auth/me - null null
+2025-05-06 14:31:45.840 +00:00 [INF] CORS policy execution successful.
+2025-05-06 14:31:45.843 +00:00 [INF] Executing endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
+2025-05-06 14:31:45.850 +00:00 [INF] Route matched with {action = "GetUserData", controller = "Auth"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetUserData() on controller Cuppie.Api.Controllers.AuthController (Cuppie.Api).
+2025-05-06 14:31:46.087 +00:00 [INF] Поступил запрос на api/auth/me
+2025-05-06 14:31:46.157 +00:00 [ERR] Ошибка при извлечении данных из токена IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '05/06/2025 13:22:18', Current time (UTC): '05/06/2025 14:31:46'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Cuppie.Infrastructure.Services.JwtTokenService.ExtractClaimsPrincipal(String token)
+   at Cuppie.Infrastructure.Services.AuthService.GetCurrentUserData(String token)
+2025-05-06 14:31:46.158 +00:00 [WRN] Не удалось получить данные из jwt куки
+2025-05-06 14:31:46.161 +00:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-05-06 14:31:46.187 +00:00 [INF] Executed action Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api) in 333.8118ms
+2025-05-06 14:31:46.195 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.GetUserData (Cuppie.Api)'
+2025-05-06 14:31:46.198 +00:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/auth/me - 401 null application/problem+json; charset=utf-8 387.0736ms
+2025-05-06 14:31:51.175 +00:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - null null
+2025-05-06 14:31:51.178 +00:00 [INF] CORS policy execution successful.
+2025-05-06 14:31:51.179 +00:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - 204 null null 3.3299ms
+2025-05-06 14:31:51.183 +00:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 38
+2025-05-06 14:31:51.184 +00:00 [INF] CORS policy execution successful.
+2025-05-06 14:31:51.185 +00:00 [INF] Executing endpoint 'Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api)'
+2025-05-06 14:31:51.193 +00:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Cuppie.Application.DTOs.LoginModelDto) on controller Cuppie.Api.Controllers.AuthController (Cuppie.Api).
+2025-05-06 14:31:51.215 +00:00 [INF] Поступил запрос на api/auth/login
+2025-05-06 14:31:51.894 +00:00 [INF] Executed DbCommand (29ms) [Parameters=[@__loginModel_Username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Email", u."PasswordHash", u."Salt", u."Username"
+FROM "User" AS u
+WHERE u."Username" = @__loginModel_Username_0
+LIMIT 1
+2025-05-06 14:31:51.905 +00:00 [WRN] Неверный логин или пароль для пользователя: cup
+2025-05-06 14:31:51.906 +00:00 [INF] Неверный логин или пароль
+2025-05-06 14:31:51.908 +00:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-05-06 14:31:51.909 +00:00 [INF] Executed action Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api) in 715.8939ms
+2025-05-06 14:31:51.910 +00:00 [INF] Executed endpoint 'Cuppie.Api.Controllers.AuthController.Login (Cuppie.Api)'
+2025-05-06 14:31:51.914 +00:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 401 null text/plain; charset=utf-8 730.8394ms
+2025-05-06 14:34:24.695 +00:00 [INF] Application is shutting down...

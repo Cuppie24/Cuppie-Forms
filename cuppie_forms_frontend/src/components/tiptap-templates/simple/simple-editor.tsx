@@ -18,6 +18,10 @@ import { Link } from "@/components/tiptap-extension/link-extension"
 import { Selection } from "@/components/tiptap-extension/selection-extension"
 import { TrailingNode } from "@/components/tiptap-extension/trailing-node-extension"
 
+import { SlashCommand } from "@/components/tiptap-extension/slash-command"
+
+
+
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button"
 import { Spacer } from "@/components/tiptap-ui-primitive/spacer"
@@ -35,6 +39,7 @@ import "@/components/tiptap-node/image-node/image-node.scss"
 import "@/components/tiptap-node/paragraph-node/paragraph-node.scss"
 
 // --- Tiptap UI ---
+import { SlashMenu } from "@/components/tiptap-ui/slash-menu"
 import { HeadingDropdownMenu } from "@/components/tiptap-ui/heading-dropdown-menu"
 import { ImageUploadButton } from "@/components/tiptap-ui/image-upload-button"
 import { ListDropdownMenu } from "@/components/tiptap-ui/list-dropdown-menu"
@@ -219,6 +224,7 @@ export function SimpleEditor() {
       },
     },
     extensions: [
+      SlashCommand,
       StarterKit,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Underline,
@@ -315,6 +321,13 @@ export function SimpleEditor() {
           role="presentation"
           className="simple-editor-content"
         />
+        <SlashMenu
+          position={{ top: 100, left: 200 }} // подставьте реальные координаты
+          onSelect={(item) => {
+          console.log("Выбрано:", item);
+          }}
+        />
+
       </div>
     </EditorContext.Provider>
   )

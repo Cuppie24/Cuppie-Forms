@@ -1,8 +1,8 @@
 # This is a generated file. Not intended for manual editing.
 services:
-  cuppie_forms_api:
+  cuppie_forms_backend:
     build:
-      context: "C:\\Users\\Cuppie\\RiderProjects\\cuppie_forms_api"
+      context: "C:\\Users\\Cuppie\\RiderProjects\\CuppieForms\\cuppie_forms_backend"
       dockerfile: "Dockerfile"
       target: "base"
     command: []
@@ -11,10 +11,11 @@ services:
     - "/app/bin/Debug/net9.0/Cuppie.Api.dll"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
-    image: "cuppie_forms_api:dev"
+    image: "cuppie_forms_backend:dev"
     ports: []
     volumes:
-    - "C:\\Users\\Cuppie\\RiderProjects\\cuppie_forms_api\\src\\Cuppie.Api:/app:rw"
-    - "C:\\Users\\Cuppie\\RiderProjects\\cuppie_forms_api:/src:rw"
+    - "C:\\Users\\Cuppie\\RiderProjects\\CuppieForms\\cuppie_forms_backend\\src\\\
+      Cuppie.Api:/app:rw"
+    - "C:\\Users\\Cuppie\\RiderProjects\\CuppieForms\\cuppie_forms_backend:/src:rw"
     - "C:\\Users\\Cuppie\\.nuget\\packages:/root/.nuget/packages"
     working_dir: "/app"

@@ -45,7 +45,7 @@ namespace Cuppie.Infrastructure.Services
             return jwt;
         }
 
-        public string GenerateJwtToken(Claim[] claims)
+        private string GenerateJwtToken(Claim[] claims)
         {
 
             var token = new JwtSecurityToken(
@@ -61,7 +61,7 @@ namespace Cuppie.Infrastructure.Services
             return jwt;
         }
 
-        public SigningCredentials GetSigningCredentials()
+        private SigningCredentials GetSigningCredentials()
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key));
             return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

@@ -94,7 +94,7 @@ export default function RegisterForm() {
             disabled={isSubmitting}
             className="w-full p-4 bg-[#FF6B6B] text-white rounded-xl hover:bg-[#E04E4E] hover:shadow-lg transition-all duration-300 font-medium"
           >
-            Зарегистрироваться
+            {isSubmitting ? "Регистрация..." : "Зарегистрироваться"}
           </button>
         </form>
 
