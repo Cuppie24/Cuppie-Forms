@@ -14,5 +14,6 @@ namespace Cuppie.Domain.Entities
         public DateOnly CreatedAt { get; set; }
 
         public ICollection<UserOrganisationEntity> UserOrganisations { get; set; } = new List<UserOrganisationEntity>();
+        public ICollection<WorkspaceEntity> Workspaces { get; set; } = new List<WorkspaceEntity>();
     }
 }

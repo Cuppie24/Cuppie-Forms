@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cuppie.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CuppieDbContext))]
-    [Migration("20250506115428_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250520051156_AddedPageAndWorkspaceEntities")]
+    partial class AddedPageAndWorkspaceEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,39 @@ namespace Cuppie.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Organisation", (string)null);
+                });
+
+            modelBuilder.Entity("Cuppie.Domain.Entities.PageEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ParentPageEntityId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ParentPageId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("WorkspaceId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentPageEntityId");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.ToTable("Page", (string)null);
                 });
 
             modelBuilder.Entity("Cuppie.Domain.Entities.UserEntity", b =>
@@ -107,6 +140,46 @@ namespace Cuppie.Infrastructure.Data.Migrations
                     b.ToTable("UserOrganisation", (string)null);
                 });
 
+            modelBuilder.Entity("Cuppie.Domain.Entities.WorkspaceEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("OrganisationId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganisationId");
+
+                    b.ToTable("Workspace", (string)null);
+                });
+
+            modelBuilder.Entity("Cuppie.Domain.Entities.PageEntity", b =>
+                {
+                    b.HasOne("Cuppie.Domain.Entities.PageEntity", "ParentPageEntity")
+                        .WithMany()
+                        .HasForeignKey("ParentPageEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cuppie.Domain.Entities.WorkspaceEntity", "WorkspaceEntity")
+                        .WithMany("Pages")
+                        .HasForeignKey("WorkspaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentPageEntity");
+
+                    b.Navigation("WorkspaceEntity");
+                });
+
             modelBuilder.Entity("Cuppie.Domain.Entities.UserOrganisationEntity", b =>
                 {
                     b.HasOne("Cuppie.Domain.Entities.OrganisationEntity", "OrganisationEntity")
@@ -126,14 +199,32 @@ namespace Cuppie.Infrastructure.Data.Migrations
                     b.Navigation("UserEntity");
                 });
 
+            modelBuilder.Entity("Cuppie.Domain.Entities.WorkspaceEntity", b =>
+                {
+                    b.HasOne("Cuppie.Domain.Entities.OrganisationEntity", "OrganisationEntity")
+                        .WithMany("Workspaces")
+                        .HasForeignKey("OrganisationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrganisationEntity");
+                });
+
             modelBuilder.Entity("Cuppie.Domain.Entities.OrganisationEntity", b =>
                 {
                     b.Navigation("UserOrganisations");
+
+                    b.Navigation("Workspaces");
                 });
 
             modelBuilder.Entity("Cuppie.Domain.Entities.UserEntity", b =>
                 {
                     b.Navigation("UserOrganisations");
+                });
+
+            modelBuilder.Entity("Cuppie.Domain.Entities.WorkspaceEntity", b =>
+                {
+                    b.Navigation("Pages");
                 });
 #pragma warning restore 612, 618
         }

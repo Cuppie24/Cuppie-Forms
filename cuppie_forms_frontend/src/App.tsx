@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./Pages/HomePage";
+import EditorPage from "./Pages/EditorPage";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
 import AuthPage from "@pages/AuthPage";
 
@@ -11,7 +11,7 @@ export default function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <EditorPage />
             </ProtectedRoute>
           }
         />

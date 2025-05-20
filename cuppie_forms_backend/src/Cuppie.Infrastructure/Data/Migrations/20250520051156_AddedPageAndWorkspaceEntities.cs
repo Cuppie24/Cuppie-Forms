@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cuppie.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddedPageAndWorkspaceEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,26 @@ namespace Cuppie.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Workspace",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    OrganisationId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workspace", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Workspace_Organisation_OrganisationId",
+                        column: x => x.OrganisationId,
+                        principalTable: "Organisation",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserOrganisation",
                 columns: table => new
                 {
@@ -70,6 +90,45 @@ namespace Cuppie.Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Page",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    ParentPageId = table.Column<int>(type: "integer", nullable: false),
+                    ParentPageEntityId = table.Column<int>(type: "integer", nullable: false),
+                    WorkspaceId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Page", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Page_Page_ParentPageEntityId",
+                        column: x => x.ParentPageEntityId,
+                        principalTable: "Page",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Page_Workspace_WorkspaceId",
+                        column: x => x.WorkspaceId,
+                        principalTable: "Workspace",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Page_ParentPageEntityId",
+                table: "Page",
+                column: "ParentPageEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Page_WorkspaceId",
+                table: "Page",
+                column: "WorkspaceId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_UserOrganisation_OrganisationId",
                 table: "UserOrganisation",
@@ -79,19 +138,30 @@ namespace Cuppie.Infrastructure.Data.Migrations
                 name: "IX_UserOrganisation_UserId",
                 table: "UserOrganisation",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workspace_OrganisationId",
+                table: "Workspace",
+                column: "OrganisationId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Page");
+
+            migrationBuilder.DropTable(
                 name: "UserOrganisation");
 
             migrationBuilder.DropTable(
-                name: "Organisation");
+                name: "Workspace");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Organisation");
         }
     }
 }

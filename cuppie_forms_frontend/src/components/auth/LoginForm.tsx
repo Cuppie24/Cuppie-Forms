@@ -59,7 +59,7 @@
     };
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900/90 backdrop-blur-xl p-6 rounded-3xl border border-gray-700 space-y-4" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900 backdrop-blur-xl p-6 rounded-3xl border border-gray-700 space-y-4" noValidate>
         <div>
           <input
             {...register("username")}
