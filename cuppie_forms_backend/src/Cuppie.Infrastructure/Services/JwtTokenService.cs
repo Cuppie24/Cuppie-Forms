@@ -16,7 +16,7 @@ namespace Cuppie.Infrastructure.Services
         public static string JwtKeyName { get; set; } = "Key";
         public static string JwtIssuerName { get; set; } = "Issuer";
         public static string JwtAudienceName { get; set; } = "Audience";
-        public static string JwtLifeTimeName { get; set; } = "LifeTime";
+        public static string JwtLifeTimeName { get; set; } = "LifeTimeInMinutes";
         public static string JwtSectionName { get; set; } = "JWT";
 
         public TokenValidationParameters ValidationParameters { get; set; }
