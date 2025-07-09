@@ -31,7 +31,7 @@ export default function RegisterForm({
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      const response = await apiAxios.post("/api/auth/register", data);
+      const response = await apiAxios.post("auth/register", data);
 
       if (response.status === 200 || response.status === 201) {
         setResponseMessage("✅ Пользователь успешно создан!");

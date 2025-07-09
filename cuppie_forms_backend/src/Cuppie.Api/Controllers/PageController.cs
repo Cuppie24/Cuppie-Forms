@@ -8,7 +8,7 @@ public class PageDto
 }
 
 [ApiController]
-[Route("pages")]
+[Route("api/pages")]
 public class PageController: ControllerBase
 {
     [HttpPost("save")]

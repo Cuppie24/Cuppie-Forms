@@ -14,7 +14,7 @@ export default function HomePage() {
     try {
       const blocks = editor.document;
       const content = JSON.stringify(blocks);
-      const result = await apiAxios.post("/pages/save", {content});
+      const result = await apiAxios.post("pages/save", {content});
 
       // Предполагаем, что API возвращает JSON обратно в поле result.data
       setSavedContent(JSON.stringify(result.data, null, 2));

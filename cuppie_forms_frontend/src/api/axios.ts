@@ -1,8 +1,9 @@
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const apiAxios = axios.create({
-  baseURL: "http://localhost:5000", // <- твой сервер
-  withCredentials: true, // если ты используешь cookies (например, для JWT)
+    baseURL: apiUrl,   
+  withCredentials: true, 
 });
 
 export default apiAxios;
