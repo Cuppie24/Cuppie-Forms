@@ -13,5 +13,9 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'), // если будет
       '@': path.resolve(__dirname, 'src'),
     },
-  }
+  },
+  server:{
+    port: 80,
+    host: '0.0.0.0',
+  },
 })
