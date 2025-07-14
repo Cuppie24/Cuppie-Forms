@@ -4,11 +4,11 @@
     {
         public bool IsSuccess { get; set; }        
         public T? Data { get; set; }
-        public string? ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } = null!;
         public ErrorCode ErrorCode { get; set; }
 
         // Конструкторы для удобства
-        public static OperationResult<T> Success(T data)
+        public static OperationResult<T> Success(T? data)
         {
             return new OperationResult<T> { IsSuccess = true, Data = data };
         }
@@ -22,11 +22,10 @@
     public enum ErrorCode
     {
         UnknownError = 1,
-        InvalidInput = 2,
-        NotFound = 3,
-        Unauthorized = 4,
-        Conflict = 5,
-        InternalServerError = 6,
-        BadRequest = 7
+        ValidationError = 2,
+        Unauthorized = 3,
+        Conflict = 4,
+        BadRequest = 5,
+        NotFound = 6
     }
 }

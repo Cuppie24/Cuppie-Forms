@@ -1,4 +1,4 @@
-﻿namespace Cuppie.Application.Interfaces;
+﻿namespace Cuppie.Application.Interfaces.Services;
 
 public interface ICryptoService
 {

@@ -7,8 +7,8 @@ namespace Cuppie.Domain.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(30, MinimumLength =3)]
-        public string? Name { get; set; }
+        [StringLength(30, MinimumLength = 3)]
+        public string Name { get; set; } = null!;
 
         [Required]
         public DateOnly CreatedAt { get; set; }

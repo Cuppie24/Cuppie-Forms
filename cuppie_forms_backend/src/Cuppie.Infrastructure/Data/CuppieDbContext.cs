@@ -9,7 +9,7 @@ namespace Cuppie.Infrastructure.Data
         public DbSet<UserOrganisationEntity> UserOrganisation { get; set; } 
         public DbSet<PageEntity> Page { get; set; } 
         public DbSet<WorkspaceEntity> Workspace { get; set; }
-
+        public DbSet<RefreshTokenEntity> RefreshToken { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserEntity>().ToTable("User");
@@ -17,6 +17,7 @@ namespace Cuppie.Infrastructure.Data
             modelBuilder.Entity<UserOrganisationEntity>().ToTable("UserOrganisation");
             modelBuilder.Entity<PageEntity>().ToTable("Page");
             modelBuilder.Entity<WorkspaceEntity>().ToTable("Workspace");
+            modelBuilder.Entity<RefreshTokenEntity>().ToTable("RefreshToken");
             
 
             modelBuilder.Entity<UserOrganisationEntity>()

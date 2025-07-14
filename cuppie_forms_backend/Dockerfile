@@ -6,7 +6,7 @@ EXPOSE 5001
 
 # Слой сборки
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Release 
 WORKDIR /src
 
 # Копируем только проекты и sln

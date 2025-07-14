@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Cuppie.Application.Interfaces;
+using Cuppie.Application.Interfaces.Services;
 
 namespace Cuppie.Infrastructure.Services
 {

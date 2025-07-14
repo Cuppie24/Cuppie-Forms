@@ -1,22 +1,30 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EditorPage from "./Pages/EditorPage";
-import { ProtectedRoute } from "@/routes/ProtectedRoute";
-import AuthPage from "@pages/AuthPage";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import AuthPage from './pages/AuthPage'
+import HomePage from './pages/HomePage.tsx'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <EditorPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/auth" element={<AuthPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/auth" element={<AuthPage />} />
+            <Route 
+              path="/home" 
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route path="/" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
+  )
 }
+
+export default App

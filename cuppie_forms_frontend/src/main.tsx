@@ -1,23 +1,11 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import './tailwindout.css';
-import App from './App.tsx';
-import { AuthProvider } from './context/AuthContext.tsx';
-import { MantineProvider } from '@mantine/core';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+// import './index.css'
+import './styles/tailwindout.css'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <MantineProvider
-      theme={{}} // можно указать кастомные значения, если нужно
-      defaultColorScheme="dark"
-    >
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </MantineProvider>
-  </StrictMode>
-);
-
-
-
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)

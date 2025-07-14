@@ -1,19 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cuppie.Api.Controllers;
 
-public class PageDto
-{
-    public string Content { get; set; } = string.Empty;
-}
-
+[Authorize]
 [ApiController]
 [Route("api/pages")]
 public class PageController: ControllerBase
 {
-    [HttpPost("save")]
-    public IActionResult SavePage([FromBody] PageDto dto)
-    { 
-        return Ok(dto.Content);
+    private const string Message = "Пароль от wifi на даче: qwert123";
+
+    [HttpGet("home/get")]
+    public IActionResult GetHomePage()
+    {
+        Response.ContentType = "application/json";
+        return Ok(new {message = Message});
     }
 }

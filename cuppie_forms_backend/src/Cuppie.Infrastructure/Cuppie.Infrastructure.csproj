@@ -16,4 +16,8 @@
       <ProjectReference Include="..\Cuppie.Domain\Cuppie.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\Migrations\" />
+    </ItemGroup>
+
 </Project>
