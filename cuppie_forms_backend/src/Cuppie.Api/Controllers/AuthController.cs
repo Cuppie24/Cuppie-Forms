@@ -62,7 +62,7 @@ namespace Cuppie.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModelDto loginDto)
         {
-            logger.Information("Поступил запрос на api/auth/login");
+            logger.Information("Поступил запрос на api/auth/login с ip: {ip}", HttpContext.Connection.RemoteIpAddress);
             if (!ModelState.IsValid)
             {
                 logger.Warning("Некорректные данные для логина");
@@ -149,8 +149,7 @@ namespace Cuppie.Api.Controllers
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete(JwtCookieName);
-            Response.Cookies.Delete(RefreshTokenCookieName);
+            DeleteCookies();
             return Ok();
         }
         
@@ -158,6 +157,9 @@ namespace Cuppie.Api.Controllers
         public IActionResult GetUserData()
         {
             logger.Information("Поступил запрос на api/auth/me");
+            logger.Information("Request Headers: {Headers}", string.Join(", ", Request.Headers.Select(h => $"{h.Key}: {h.Value}")));
+            logger.Information("Request Cookies: {Cookies}", string.Join(", ", Request.Cookies.Select(c => $"{c.Key}: {c.Value}")));
+            
             if (Request.Cookies.TryGetValue(JwtCookieName, out var jwt))
             {
                 var result = authService.GetCurrentUserData(jwt);
@@ -171,6 +173,14 @@ namespace Cuppie.Api.Controllers
             logger.Information("Нет подходящего куки для авторизации");
             return Unauthorized();
         }
+        
+        [HttpGet("health")]
+        public IActionResult Health()
+        {
+            logger.Information("Health check request received");
+            logger.Information("Request Headers: {Headers}", string.Join(", ", Request.Headers.Select(h => $"{h.Key}: {h.Value}")));
+            return Ok(new { status = "healthy", timestamp = DateTime.UtcNow });
+        }
 
         private CookieOptions GetTokenCookieOptions(int expiresInMinutes)
         {
@@ -179,22 +189,39 @@ namespace Cuppie.Api.Controllers
             var result = new CookieOptions()
             {
                 HttpOnly = true,
-                SameSite = SameSiteMode.Lax,
+                SameSite = SameSiteMode.None,
+                Secure = true, // Required for SameSite=None
                 Expires = DateTimeOffset.UtcNow.AddMinutes(expiresInMinutes)
             };
             return result;
         }
+        private CookieOptions GetTokenCookieOptions()
+        {
+            var result = new CookieOptions()
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true, // Required for SameSite=None
+            };
+            return result;
+        }
+        
         private string? GetIp()
         {
             return HttpContext.Connection.RemoteIpAddress?.ToString();
+        }
+
+        private void DeleteCookies()
+        {
+            Response.Cookies.Delete(JwtCookieName, GetTokenCookieOptions());
+            Response.Cookies.Delete(RefreshTokenCookieName, GetTokenCookieOptions());
         }
 
         private void SetTokenCookies(TokenData accessJwtToken, TokenData refreshToken)
         {
             try
             {
-                Response.Cookies.Delete(RefreshTokenCookieName);
-                Response.Cookies.Delete(JwtCookieName);
+                DeleteCookies();
 
                 Response.Cookies.Append(JwtCookieName, accessJwtToken.Token,
                     GetTokenCookieOptions(accessJwtToken.ExpiresInMinutes));

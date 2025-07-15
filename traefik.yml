@@ -1,0 +1,31 @@
+# traefik.yml
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  websecure:
+    address: ":443"
+    http:
+      tls: true
+
+api:
+  insecure: false
+  dashboard: true
+
+providers:
+  docker: 
+    network: web
+    exposedByDefault: false
+    endpoint: "unix:///var/run/docker.sock"
+  file:
+    filename: /etc/traefik/tls_dynamic.yml
+
+
+
+    

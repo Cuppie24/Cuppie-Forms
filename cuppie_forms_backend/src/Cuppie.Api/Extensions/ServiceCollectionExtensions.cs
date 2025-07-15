@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using Cuppie.Application.Interfaces.DAO;
 using Cuppie.Application.Interfaces.Services;
 using Cuppie.Infrastructure.DAO;
@@ -21,14 +22,24 @@ public static class ServiceCollectionExtensions
         services.AddOpenApi();
         services.AddCors(options =>
         {
+            var corsOrigins = Environment.GetEnvironmentVariable("CORS_ALLOWED_ORIGINS") ?? 
+                             config.GetValue<string>("CORS_ALLOWED_ORIGINS") ?? 
+                             "https://cuppie.cup";
+            
+            var origins = corsOrigins.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(o => o.Trim())
+                .ToArray();
+            
+            // Log CORS configuration for debugging
+            Console.WriteLine($"CORS Origins configured: {string.Join(", ", origins)}");
+            
             options.AddPolicy("FrontDev", cors =>
             {
-                cors.WithOrigins(
-                        "http://localhost:3001",
-                        "http://localhost:3000")
+                cors.WithOrigins(origins)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials();
+                    .AllowCredentials()
+                    .SetPreflightMaxAge(TimeSpan.FromMinutes(5));
             });
         });
         services.AddAuthentication("Bearer")
@@ -60,6 +71,12 @@ public static class ServiceCollectionExtensions
                
             });
         services.AddAuthorization();
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.All;
+            options.KnownProxies.Add(IPAddress.Parse("127.18.0.3")); 
+            options.ForwardLimit = 1;
+        });
 
         
         services.AddScoped<IAuthService, AuthService>();
@@ -67,25 +84,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICryptoService, CryptoService>();
         services.AddScoped<IUserDao, UserDao>();
         services.AddScoped<IRefreshTokenDao, RefreshTokenDao>();
-        
         services.Configure<JwtOptions>(config.GetSection("JWT"));
         
-        // services.AddSingleton<TokenValidationParameters>(sp =>
-        // {
-        //     var jwtOptions = sp.GetRequiredService<IOptions<JwtOptions>>().Value;
-        //
-        //     return new TokenValidationParameters
-        //     {
-        //         ValidateIssuer = true,
-        //         ValidIssuer = jwtOptions.Issuer,
-        //         ValidateAudience = true,
-        //         ValidAudience = jwtOptions.Audience,
-        //         ValidateLifetime = true,
-        //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key)),
-        //         ValidateIssuerSigningKey = true,
-        //         ClockSkew = TimeSpan.Zero
-        //     };
-        // });
         return services;
     }
 

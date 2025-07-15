@@ -1,47 +1,83 @@
 ﻿services:
+  traefik:
+    image: traefik:v3.4
+    container_name: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Dashboard
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.docker.localhost`)"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.tls=true"
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./tls_dynamic.yml:/etc/traefik/tls_dynamic.yml:ro
+      - ./certs:/certs:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - web
+
+
   cuppie_forms_backend:
-    image: cuppie_forms_backend
     build:
       context: ./cuppie_forms_backend
-      dockerfile: Dockerfile
     container_name: api
+    environment:
+      - ConnectionStrings__DefaultConnection=${DATABASE_CONNECTION_STRING:-Host=db;Port=5432;Database=cuppie_database;Username=cuppie;Password=cupcup}
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-https://cuppie.cup}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`cuppie.api`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.services.api.loadbalancer.server.port=5000"
     depends_on:
       - db
-    environment:
-      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=cuppie_database;Username=cuppie;Password=cupcup
-      - ASPNETCORE_URLS=https://+:5001;http://+:5000
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=cupcupcup
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/SslSertificate.pfx
-    ports:
-      - "5000:5000"
-      - "5001:5001"
-    volumes:
-      - ./cuppie_forms_backend/certs:/https  # Проброс директории с сертификатом
+    networks:
+      - web
 
   cuppie_forms_frontend:
-    image: cuppie_forms_frontend
     build:
       context: ./cuppie_forms_frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:80"
+      args:
+        - VITE_API_URL=${FRONTEND_API_URL:-https://cuppie.api}
     container_name: front
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.front.rule=Host(`cuppie.cup`)"
+      - "traefik.http.routers.front.entrypoints=websecure"
+      - "traefik.http.routers.front.tls=true"
+      - "traefik.http.services.front.loadbalancer.server.port=80"
     depends_on:
       - cuppie_forms_backend
+    networks:
+      - web
 
   db:
     image: postgres:16
+    container_name: db
     restart: always
     environment:
       POSTGRES_DB: cuppie_database
       POSTGRES_USER: cuppie
       POSTGRES_PASSWORD: cupcup
-    ports:
-      - "5432:5432"
-    container_name: db
     volumes:
       - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - web
 
 volumes:
   pgdata:
+
+networks:
+  web:
+    driver: bridge

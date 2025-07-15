@@ -1,8 +1,6 @@
 ﻿# Базовый рантайм слой
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
-EXPOSE 5000
-EXPOSE 5001
 
 # Слой сборки
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
@@ -33,4 +31,5 @@ RUN dotnet publish "Cuppie.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+EXPOSE 5000
 ENTRYPOINT ["dotnet", "Cuppie.Api.dll"]

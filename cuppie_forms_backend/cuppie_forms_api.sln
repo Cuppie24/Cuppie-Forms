@@ -4,6 +4,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\compose.yaml = ..\compose.yaml
 		Dockerfile = Dockerfile
+		..\traefik.yml = ..\traefik.yml
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cuppie.Api", "src\Cuppie.Api\Cuppie.Api.csproj", "{3BA4D5CE-2CE0-4703-A0B4-B54B95E6E599}"
