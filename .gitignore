@@ -1,1 +1,2 @@
-certs/
+traefik/certs/*
+traefik/certs/.gitkeep

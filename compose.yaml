@@ -13,23 +13,27 @@
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.tls=true"
     volumes:
-      - ./traefik.yml:/etc/traefik/traefik.yml:ro
-      - ./tls_dynamic.yml:/etc/traefik/tls_dynamic.yml:ro
-      - ./certs:/certs:ro
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik/tls_dynamic.yml:/etc/traefik/tls_dynamic.yml:ro
+      - ./traefik/certs:/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - web
-
 
   cuppie_forms_backend:
     build:
       context: ./cuppie_forms_backend
     container_name: api
     environment:
-      - ConnectionStrings__DefaultConnection=${DATABASE_CONNECTION_STRING:-Host=db;Port=5432;Database=cuppie_database;Username=cuppie;Password=cupcup}
+      - ConnectionStrings__DefaultConnection=${DATABASE_CONNECTION_STRING}
       - ASPNETCORE_URLS=http://+:5000
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
-      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-https://cuppie.cup}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      - JWT__Key=${JWT__Key}
+      - JWT__Audience=${JWT__Audience}
+      - JWT__Issuer=${JWT__Issuer}
+      - JWT__AccessTokenExpiresInMinutes=${JWT__AccessTokenExpiresInMinutes}
+      - JWT__RefreshTokenExpiresInMinutes=${JWT__RefreshTokenExpiresInMinutes}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`cuppie.api`)"
@@ -45,10 +49,10 @@
     build:
       context: ./cuppie_forms_frontend
       args:
-        - VITE_API_URL=${FRONTEND_API_URL:-https://cuppie.api}
+        - VITE_API_URL=${FRONTEND_API_URL}
     container_name: front
     environment:
-      - NODE_ENV=${NODE_ENV:-production}
+      - NODE_ENV=${NODE_ENV}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.front.rule=Host(`cuppie.cup`)"
@@ -65,9 +69,9 @@
     container_name: db
     restart: always
     environment:
-      POSTGRES_DB: cuppie_database
-      POSTGRES_USER: cuppie
-      POSTGRES_PASSWORD: cupcup
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
