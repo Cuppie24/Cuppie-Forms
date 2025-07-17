@@ -76,6 +76,7 @@ CuppieForms/
 ## Установка и запуск
 ### Скачать и установить 
 [.NET SDK 9](https://dotnet.microsoft.com/en-us/download)
+
 [Docker desktop](https://www.docker.com/get-started/)
 
 ### Клонировать репозиторий:
