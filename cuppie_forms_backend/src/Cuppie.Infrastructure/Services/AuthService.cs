@@ -13,7 +13,7 @@ namespace Cuppie.Infrastructure.Services;
 
 public class AuthService : IAuthService
 {
-    private readonly IJwtTokenService _jwtTokenService;
+    private readonly ITokenService _tokenService;
     private readonly ICryptoService _cryptoService;
     private readonly ILogger _logger;
     private readonly IUserDao _userDao;
@@ -154,8 +154,8 @@ public class AuthService : IAuthService
         AuthResponseDto result = new AuthResponseDto();
         
         //генерируем access и refresh токены
-        result.JwtToken = _jwtTokenService.GetJwtAccessToken(user);
-        result.RefreshToken = _jwtTokenService.GetRefreshToken(RefreshTokenLength);
+        result.JwtToken = _tokenService.GetJwtAccessToken(user);
+        result.RefreshToken = _tokenService.GetRefreshToken(RefreshTokenLength);
         if (string.IsNullOrEmpty(result.JwtToken.Token))
         {
             _logger.Error("Не удалось сгенерировать JWT токен для пользователя с id: {id}", user.Id);
@@ -274,7 +274,7 @@ public class AuthService : IAuthService
     {
         try
         {
-            var extractResult = _jwtTokenService.ExtractClaimsPrincipal(token);
+            var extractResult = _tokenService.ExtractClaimsPrincipal(token);
             if (extractResult.ErrorCode == ErrorCode.Unauthorized)
                 return OperationResult<SafeUserDataDto>.Failure("Невалидный jwt токен", ErrorCode.Unauthorized);
             if (!extractResult.IsSuccess)
@@ -308,7 +308,7 @@ public class AuthService : IAuthService
         }
     }
     
-    public AuthService(IJwtTokenService jwtTokenService,
+    public AuthService(ITokenService tokenService,
         ICryptoService cryptoService,
         ILogger logger,  
         IUserDao userDao, 
@@ -317,7 +317,7 @@ public class AuthService : IAuthService
         _cryptoService = cryptoService;
         _userDao = userDao;
         _refreshTokenDao = refreshTokenDao;
-        _jwtTokenService = jwtTokenService;
+        _tokenService = tokenService;
         _logger = logger ?? throw new ArgumentNullException(nameof(logger)); // Чтобы убедиться, что логгер не null
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Cuppie.Infrastructure.Services
 {
-    public class JwtTokenService : IJwtTokenService
+    public class TokenService : ITokenService
     {
         /// <summary>
         /// Represents the cookie name used to store the JWT token.
@@ -113,7 +113,7 @@ namespace Cuppie.Infrastructure.Services
             return OperationResult<ClaimsPrincipal>.Success(principal);
         }
 
-        public JwtTokenService(IOptions<JwtOptions> options)
+        public TokenService(IOptions<JwtOptions> options)
         {
             _jwtOptions = options.Value;
             ValidationParameters = new TokenValidationParameters()

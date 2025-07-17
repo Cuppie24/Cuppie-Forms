@@ -7,7 +7,7 @@
         public string ErrorMessage { get; set; } = null!;
         public ErrorCode ErrorCode { get; set; }
 
-        // Конструкторы для удобства
+        
         public static OperationResult<T> Success(T? data)
         {
             return new OperationResult<T> { IsSuccess = true, Data = data };

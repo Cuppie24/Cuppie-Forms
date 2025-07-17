@@ -4,7 +4,7 @@ using Cuppie.Domain.Entities;
 
 namespace Cuppie.Application.Interfaces.Services;
 
-public interface IJwtTokenService
+public interface ITokenService
 {
     TokenData GetJwtAccessToken(UserEntity userEntity);
     OperationResult<ClaimsPrincipal> ExtractClaimsPrincipal(string token);

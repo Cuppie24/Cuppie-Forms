@@ -80,7 +80,7 @@ public static class ServiceCollectionExtensions
 
         
         services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ICryptoService, CryptoService>();
         services.AddScoped<IUserDao, UserDao>();
         services.AddScoped<IRefreshTokenDao, RefreshTokenDao>();

@@ -17,4 +17,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\src\Cuppie.Api\Cuppie.Api.csproj" />
+    </ItemGroup>
+
 </Project>
