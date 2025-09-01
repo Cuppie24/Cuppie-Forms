@@ -154,6 +154,16 @@ tls:
     - certFile: /certs/local.crt
       keyFile: /certs/local.key
 ```
+## Настройка фронтенда
+
+1. Установите [Node.js](https://nodejs.org/) (актуальную LTS-версию).  
+2. Установите зависимости:  
+   npm install  
+3. Соберите проект:  
+   npm run build
+
+
+
 docker-compose up --build
 Перейти в браузере:
 
