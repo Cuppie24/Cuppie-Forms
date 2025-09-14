@@ -169,9 +169,18 @@ namespace Cuppie.Api.Controllers
 
         private void DeleteCookies()
         {
-            Response.Cookies.Delete(JwtCookieName);
-            Response.Cookies.Delete(RefreshTokenCookieName);
+            var options = new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true,
+                Path = "/" // обязательно, если при установке был путь
+            };
+
+            Response.Cookies.Delete(JwtCookieName, options);
+            Response.Cookies.Delete(RefreshTokenCookieName, options);
         }
+
 
         private void SetTokenCookies(TokenData accessJwtToken, TokenData refreshToken)
         {

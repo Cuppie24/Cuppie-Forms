@@ -1,3 +1,6 @@
 traefik/certs/*
 traefik/certs/.gitkeep
 .env
+/cuppie_forms_backend/src/Cuppie.Api/Cuppie.Api.csproj.user
+/cuppie_forms_backend/.vs
+/.env

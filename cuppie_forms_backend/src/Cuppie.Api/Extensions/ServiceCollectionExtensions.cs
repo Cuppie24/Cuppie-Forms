@@ -7,7 +7,6 @@ using Cuppie.Infrastructure.Data;
 using Cuppie.Infrastructure.Services;
 using Cuppie.Infrastructure.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cuppie.Api.Extensions;
