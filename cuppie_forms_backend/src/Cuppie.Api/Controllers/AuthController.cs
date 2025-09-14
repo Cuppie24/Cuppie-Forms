@@ -156,12 +156,6 @@ namespace Cuppie.Api.Controllers
             return Ok(result.Data);
         }
 
-        [HttpGet("health")]
-        public IActionResult Health()
-        {
-            return Ok(new { status = "healthy", timestamp = DateTime.UtcNow });
-        }
-
         private string? GetIp()
         {
             return HttpContext.Connection.RemoteIpAddress?.ToString();
