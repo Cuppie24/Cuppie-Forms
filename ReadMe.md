@@ -115,8 +115,7 @@ DATABASE_CONNECTION_STRING=Host=db;Port=<Your port>;Database=<Your database name
 ```
 //создание миграции
 dotnet ef migrations add InitialMigration --project ./src/Cuppie.Infrastructure --startup-project ./src/Cuppie.Api --context CuppieDbContext --output-dir Data/Migrations
-//обновление БД
-dotnet ef database update --project ./src/Cuppie.Infrastructure --startup-project ./src/Cuppie.Api --context CuppieDbContext 
+//обновление БД после запуска докер контейнера (ниже)
 ``` 
 
 ---
@@ -162,7 +161,10 @@ tls:
 3. Соберите проект:  
    npm run build
 
-
+```
+//Обновляем БД
+dotnet ef database update --project ./src/Cuppie.Infrastructure --startup-project ./src/Cuppie.Api --context CuppieDbContext 
+```
 
 docker-compose up --build
 Перейти в браузере:
