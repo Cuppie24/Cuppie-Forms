@@ -15,7 +15,7 @@ namespace Cuppie.Api.Controllers
         private const string RefreshTokenCookieName = "refreshToken";
 
         [HttpPost("register")]
-        public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterModelDto registerDto)
+        public async Task<ActionResult<SafeUserDataDto>> Register([FromBody] RegisterModelDto registerDto)
         {
             if (!ModelState.IsValid)
                 return ValidationProblem(ModelState);
@@ -46,7 +46,7 @@ namespace Cuppie.Api.Controllers
             if (result.IsSuccess)
             {
                 SetTokenCookies(result.Data.JwtToken, result.Data.RefreshToken);
-                return Ok(result.Data);
+                return Ok(result.Data.User);
             }
 
             return Problem(
@@ -57,7 +57,7 @@ namespace Cuppie.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AuthResponseDto>> Login([FromBody] LoginModelDto loginDto)
+        public async Task<ActionResult<SafeUserDataDto>> Login([FromBody] LoginModelDto loginDto)
         {
             if (!ModelState.IsValid)
                 return ValidationProblem(ModelState);
@@ -84,7 +84,7 @@ namespace Cuppie.Api.Controllers
             if (result.IsSuccess)
             {
                 SetTokenCookies(result.Data.JwtToken, result.Data.RefreshToken);
-                return Ok(result.Data);
+                return Ok(result.Data.User);
             }
 
             if (result.ErrorCode == ErrorCode.Unauthorized)
@@ -114,7 +114,7 @@ namespace Cuppie.Api.Controllers
                 if (result.IsSuccess)
                 {
                     SetTokenCookies(result.Data.JwtToken, result.Data.RefreshToken);
-                    return Ok(result.Data);
+                    return Ok(result.Data.User);
                 }
 
                 return result.ErrorCode switch
@@ -169,26 +169,18 @@ namespace Cuppie.Api.Controllers
 
         private void DeleteCookies()
         {
-            var options = new CookieOptions
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.None,
-                Secure = true,
-                Path = "/" // обязательно, если при установке был путь
-            };
-
-            Response.Cookies.Delete(JwtCookieName, options);
-            Response.Cookies.Delete(RefreshTokenCookieName, options);
+            Response.Cookies.Delete(JwtCookieName, GetTokenCookieOptions());
+            Response.Cookies.Delete(RefreshTokenCookieName, GetTokenCookieOptions());
         }
 
 
         private void SetTokenCookies(TokenData accessJwtToken, TokenData refreshToken)
         {
-            Response.Cookies.Append(JwtCookieName, accessJwtToken.Token, GetTokenCookieOptions(accessJwtToken.ExpiresInMinutes));
-            Response.Cookies.Append(RefreshTokenCookieName, refreshToken.Token, GetTokenCookieOptions(refreshToken.ExpiresInMinutes));
+            Response.Cookies.Append(JwtCookieName, accessJwtToken.Token, GetTokenWriteCookieOptions(accessJwtToken.ExpiresInMinutes));
+            Response.Cookies.Append(RefreshTokenCookieName, refreshToken.Token, GetTokenWriteCookieOptions(refreshToken.ExpiresInMinutes));
         }
 
-        private CookieOptions GetTokenCookieOptions(int expiresInMinutes)
+        private CookieOptions GetTokenWriteCookieOptions(int expiresInMinutes)
         {
             return new CookieOptions
             {
@@ -196,6 +188,15 @@ namespace Cuppie.Api.Controllers
                 SameSite = SameSiteMode.None,
                 Secure = true,
                 Expires = DateTimeOffset.UtcNow.AddMinutes(expiresInMinutes)
+            };
+        }
+        private CookieOptions GetTokenCookieOptions()
+        {
+            return new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true
             };
         }
     }
